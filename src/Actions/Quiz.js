@@ -1,4 +1,6 @@
 import { tokenConfig } from "./Auth";
+import axios from "axios";
+import { returnErrors } from "./Messages";
 import {
   START_TEST_SUCCESS,
   START_TEST_FAIL,
@@ -21,36 +23,36 @@ import {
 } from "./Types";
 
 // Action to start a test
-export const startTest = (exam_id, subject_name, year_value) => (dispatch) => {
-  const body = JSON.stringify({
-    exam: exam_id,
-    subject: subject_name,
-    year: year_value,
-  });
-  axios
-    .post("/api/exams/start-test/", body, tokenConfig(getState()))
-    .then((res) =>
-      dispatch({
-        type: START_TEST_SUCCESS,
-        payload: res.data,
-      })
-    )
-    .catch((err) => {
-      dispatch(returnErrors(err.response.data, err.response.status));
-      dispatch({ type: START_TEST_FAIL });
+export const startTest =
+  (exam_id, subject_name, year_value) => (dispatch, getState) => {
+    const body = JSON.stringify({
+      exam: exam_id,
+      subject: subject_name,
+      year: year_value,
     });
-};
+    axios
+      .post("/api/exams/start-test/", body, tokenConfig(getState))
+      .then((res) =>
+        dispatch({
+          type: START_TEST_SUCCESS,
+          payload: res.data,
+        })
+      )
+      .catch((err) => {
+        dispatch(returnErrors(err.response.data, err.response.status));
+        dispatch({ type: START_TEST_FAIL });
+      });
+  };
 
-// Action to submit an answer
 export const submitAnswer =
-  (test_instance_id, question_id, selected_option) => (dispatch) => {
+  (test_instance_id, question_id, selected_option) => (dispatch, getState) => {
     const body = JSON.stringify({
       test_instance: test_instance_id,
       question: question_id,
       selected_option: selected_option,
     });
     axios
-      .post("/api/exams/submit-answer/", body, tokenConfig(getState()))
+      .post("/api/exams/submit-answer/", body, tokenConfig(getState))
       .then((res) =>
         dispatch({
           type: SUBMIT_ANSWER_SUCCESS,
@@ -64,12 +66,12 @@ export const submitAnswer =
   };
 
 // Action to complete a test
-export const completeTest = (test_instance_id) => (dispatch) => {
+export const completeTest = (test_instance_id) => (dispatch, getState) => {
   axios
     .patch(
       `/api/exams/complete-test/${test_instance_id}/`,
       {},
-      tokenConfig(getState())
+      tokenConfig(getState)
     )
     .then((res) =>
       dispatch({
@@ -84,9 +86,9 @@ export const completeTest = (test_instance_id) => (dispatch) => {
 };
 
 // Action to fetch completed tests
-export const fetchCompletedTests = () => (dispatch) => {
+export const fetchCompletedTests = () => (dispatch, getState) => {
   axios
-    .get("/api/exams/completed-tests/", tokenConfig(getState()))
+    .get("/api/exams/completed-tests/", tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: FETCH_COMPLETED_TESTS_SUCCESS,
@@ -100,9 +102,9 @@ export const fetchCompletedTests = () => (dispatch) => {
 };
 
 // Action to fetch all test instances
-export const fetchAllTestInstances = () => (dispatch) => {
+export const fetchAllTestInstances = () => (dispatch, getState) => {
   axios
-    .get("/api/exams/all-test-instances/", tokenConfig(getState()))
+    .get("/api/exams/all-test-instances/", tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: FETCH_ALL_TEST_INSTANCES_SUCCESS,
@@ -117,11 +119,11 @@ export const fetchAllTestInstances = () => (dispatch) => {
 
 // Action to retrieve an individual question
 export const retrieveIndividualQuestion =
-  (test_instance_id, question_id) => (dispatch) => {
+  (test_instance_id, question_id) => (dispatch, getState) => {
     axios
       .get(
         `/api/exams/test-instances/${test_instance_id}/questions/${question_id}/`,
-        tokenConfig(getState())
+        tokenConfig(getState)
       )
       .then((res) =>
         dispatch({
@@ -136,9 +138,9 @@ export const retrieveIndividualQuestion =
   };
 
 // Action to get user score
-export const fetchUserScore = (test_instance_id) => (dispatch) => {
+export const fetchUserScore = (test_instance_id) => (dispatch, getState) => {
   axios
-    .get(`/api/exams/user-score/${test_instance_id}/`, tokenConfig(getState()))
+    .get(`/api/exams/user-score/${test_instance_id}/`, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: FETCH_USER_SCORE_SUCCESS,
@@ -152,9 +154,9 @@ export const fetchUserScore = (test_instance_id) => (dispatch) => {
 };
 
 // Action to get test results
-export const fetchTestResults = (test_instance_id) => (dispatch) => {
+export const fetchTestResults = (test_instance_id) => (dispatch, getState) => {
   axios
-    .get(`/api/exams/${test_instance_id}/results/`, tokenConfig(getState()))
+    .get(`/api/exams/${test_instance_id}/results/`, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: FETCH_TEST_RESULTS_SUCCESS,
@@ -168,9 +170,9 @@ export const fetchTestResults = (test_instance_id) => (dispatch) => {
 };
 
 // Action to get total study time
-export const fetchTotalStudyTime = () => (dispatch) => {
+export const fetchTotalStudyTime = () => (dispatch, getState) => {
   axios
-    .get("/api/exams/total-study-time/", tokenConfig(getState()))
+    .get("/api/exams/total-study-time/", tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: FETCH_TOTAL_STUDY_TIME_SUCCESS,
