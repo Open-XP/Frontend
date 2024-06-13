@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import SideBar from "../../components/DashBoardSideBar/SideBar";
-import DashboardNavBar from "../../components/DashBoardSideBar/DashboardNavBar";
+import SideBar from "../../components/Dashboard/DashBoardSideBar/SideBar";
+import DashboardNavBar from "../../components/Dashboard/DashBoardSideBar/DashboardNavBar";
 import DashboardContent from "../../components/DashContent/DashboardContent/DashboardContent";
 import Void from "../../components/DashContent/DashboardContent/void";
 import MockExam from "../../components/Dashboard/MockExams/MockExam";
