@@ -1,0 +1,283 @@
+.l-i-p-login {
+    width: 510px;
+    height: 101px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    position: relative;
+    top: 71px;
+}
+
+.l-i-create-an-account-link {
+    text-decoration: none;
+}
+
+.l-i-p-login > p {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+}
+
+.l-i-p-login-body {
+    display: flex;
+    flex-direction: row;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.l-i-p-row {
+    width: 100%;
+    height: 2050px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    background: rgba(45, 156, 219, 0.04);
+}
+
+.l-i-p-bg {
+   width: 1500px;
+   height: 850px;
+   display: flex;
+   gap: 30px;
+   flex-direction: column;
+   position: relative;
+   align-items: center;
+   justify-content: center;
+   top: 120px;
+   box-shadow: 0px 8px 32.900001525878906px 0px rgba(0, 0, 0, 0.06);
+}
+
+.login-options-icons {
+    display: flex;
+    justify-content: center;
+    width: 1067px;
+    height: 66px;
+    gap: 64px;
+}
+
+#l-i-font-control {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.l-i-login-options-individual {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 313px;
+    height: 66px;
+    gap: 9px;
+    box-shadow: 0px 8px 34.599998474121094px 0px rgba(0, 0, 0, 0.08);
+    background: rgba(248, 249, 250, 1);
+
+}
+
+.l-i-line {
+    display: flex; 
+    justify-content: center;
+    width: 1123px;
+    height: 33px;
+    gap: 9px;
+    
+}
+
+.l-i-bg-3 {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 1051px;
+    height: 33px;
+}
+
+.l-i-bg-3 > div {
+    display: flex;
+    flex-direction: row;
+}
+
+.l-i-enter-email {
+    display: flex;
+    flex-direction: column;
+    width: 1051px;
+    height: 150px;
+}
+
+.l-i-enter-password-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.l-i-show {
+    width: 1051px;
+    height: 71px;
+}
+
+.l-i-show-password {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 600px;
+}
+
+.l-i-enter-password-container  {
+    display: flex;
+    flex-direction: row;
+}
+
+.l-i-placeholder {
+    width: 1051px;
+    height: 71px;
+    border-radius: 9px;
+    border: 1px;
+}
+
+.l-i-remember-and-forget-pw {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 645px;
+    align-content: center;
+    gap: 10px;
+}
+
+.l-i-show-password {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: black;
+
+}
+
+.l-i-remember-and-forget-pw > p {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 500px;
+    font-size: 24px;
+
+}
+
+.l-i-r-c-f-p {
+    display: flex;
+    flex-direction: row;
+    width: 1051px;
+    height: 27px;
+}
+
+.l-i-button > button{
+    width: 151px;
+    height: 55px;
+    background: rgba(217, 217, 217, 0.32);
+    font-family: 'Open sans', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+}
+
+.l-i-button {
+    position: relative;
+    width: 1051px;
+
+}
+
+.l-i-t-o-s {
+    width: 1051px;
+    height: 27px;
+}
+
+.l-i-t-o-s > p > span {
+    color: rgba(45, 156, 219, 1);
+    width: 666px;
+    height: 27px;
+}
+
+.l-i-t-o-s > p {
+    font-family:'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.l-i-enter-email > p {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+
+
+.l-i-forgot-password a {
+    position: relative;
+    left: 740px;
+    text-decoration: none;
+}
+
+.l-i-check-box {
+    
+}
+
+.l-i-remember-me {
+    position: relative;
+    left: 30px;
+}
+
+.l-i-remember-me > p {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.l-i-line-1, .l-i-line-2  {
+    width: 510px;
+    height: 1px;
+    position: relative;
+    top: 10px;
+    background-color: rgba(60, 60, 60, 0.27);
+}
+
+.l-i-placeholder {
+    width: 1051px;
+    height: 71px;
+}
+
+.l-i-bg-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1051px;
+    height: 550px;
+    gap: 20px;
+
+}
+
+input[placeholder="Johndoes@gmail.com"], input[placeholder="Type your password"] {
+    width: 1051px;
+    height: 71px;
+    background: rgba(45, 156, 219, 0.04);
+    border: 1px solid rgba(45, 156, 219, 1);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.l-i-enter-password > p {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+#l-i-icon-control {
+    width: 22px;
+    height: 22px;
+}
+
+.l-i-show-password-eye {
+    width: 31px;
+    height: 21.7px;
+    position: relative;
+    top: 2.5px;
+}
