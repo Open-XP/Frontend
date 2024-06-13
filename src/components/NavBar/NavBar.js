@@ -42,7 +42,7 @@ const Navbar = () => {
             </li>
             <div className="nav-line"></div>
             <li id="list-item">
-              <Link to="/login" className="no-highlight">
+              <Link to="/dashboard" className="no-highlight">
                 LogIn
               </Link>
             </li>
