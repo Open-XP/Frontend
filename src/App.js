@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // Import components
 import NavBar from "./components/NavBar/NavBar.js";
 import Heros from "./components/Heros/Heros.js";
@@ -26,6 +21,7 @@ import store from "./Store.js";
 import SignUpPage from "./Pages/Accounts/SignUpPage.js";
 import PrivateRoute from "./Pages/DashBoard/PrivateRoute.js";
 import Dashboard from "./Pages/DashBoard/DashBoard.js";
+import NewDashBoard from "./Pages/DashBoard/NewDashBoard.js";
 
 function App() {
   return (
@@ -54,10 +50,8 @@ function App() {
                 </>
               }
             />
-          </Routes>
-          <Routes>
-            <Route path="/login" Component={LogInPage} />
-            <Route path="/signup" Component={SignUpPage} />
+            <Route path="/login" element={<LogInPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
             <Route
               path="/dashboard"
               element={
@@ -66,7 +60,8 @@ function App() {
                 </PrivateRoute>
               }
             />
-            {/* <PrivateRoute exact path="/" component={Dashboard} /> */}
+            <Route path="/mock-test" element={<div>Mock Test Page</div>} />
+            <Route path="/dashboard/*" element={<NewDashBoard />} />
           </Routes>
         </div>
       </Router>
