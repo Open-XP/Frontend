@@ -67,7 +67,12 @@ class ExamSetter extends Component {
             this.props.navigate(`evaluation/${data.id}`);
           }
 
-          console.log("Test started with ID:", data.id);
+          console.log(
+            "Test started with ID:",
+            data.id,
+            "Test duration is",
+            data.duration
+          );
         })
         .catch((error) => {
           console.error("Failed to start test:", error);
