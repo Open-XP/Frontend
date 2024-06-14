@@ -22,7 +22,7 @@ const NewDashBoard = () => {
           <Routes>
             <Route path="/" element={<DashboardContent />} />
             <Route path="mock-exam" element={<MockExam />} />
-            <Route path="evaluation" element={<Evaluation />} />
+            <Route path="mock-exam/evaluation/:id" element={<Evaluation />} />
             {/* Add more dashboard specific routes here */}
           </Routes>
         </div>
