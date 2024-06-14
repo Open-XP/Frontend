@@ -1,3 +1,4 @@
+//Reducers.js
 import {
   USER_LOADING,
   START_TEST_SUCCESS,
@@ -27,10 +28,10 @@ import {
 } from "../Actions/Types";
 
 const initialState = {
-  testInstances: [],
+  testInstances: {},
   completedTests: [],
   allTests: null,
-  individualQuestion: null,
+  individualQuestion: {},
   userScores: {},
   totalStudyTime: null,
   subjects: [],
@@ -49,7 +50,7 @@ export default function (state = initialState, action) {
     case START_TEST_SUCCESS:
       return {
         ...state,
-        testInstances: [...state.testInstances, action.payload],
+        testInstances: { id: action.payload.id, ...action.payload },
         loading: false,
       };
     case START_TEST_FAIL:
@@ -93,12 +94,18 @@ export default function (state = initialState, action) {
         allTests: action.payload,
         loading: false,
       };
-    case RETRIEVE_INDIVIDUAL_QUESTION_SUCCESS:
+    case FETCH_INDIVIDUAL_SUBJECT_QUESTION_SUCCESS:
       return {
         ...state,
         individualQuestion: {
-          ...state.individualQuestion,
-          [action.payload.id]: action.payload,
+          id: action.payload.id,
+          question: action.payload.question,
+          image: action.payload.image,
+          option_A: action.payload.option_A,
+          option_B: action.payload.option_B,
+          option_C: action.payload.option_C,
+          option_D: action.payload.option_D,
+          option_E: action.payload.option_E,
         },
         loading: false,
       };
@@ -140,13 +147,6 @@ export default function (state = initialState, action) {
         ...state,
         subjectQuestions: action.payload,
         loading: false,
-      };
-    case FETCH_INDIVIDUAL_SUBJECT_QUESTION_SUCCESS:
-      return {
-        ...state,
-        individualQuestion: action.payload,
-        loading: false,
-        error: null,
       };
     default:
       return state;
