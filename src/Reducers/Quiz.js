@@ -18,6 +18,8 @@ import {
   FETCH_TEST_RESULTS_FAIL,
   FETCH_TOTAL_STUDY_TIME_SUCCESS,
   FETCH_TOTAL_STUDY_TIME_FAIL,
+  FETCH_ALL_SUBJECTS_FAIL,
+  FETCH_ALL_SUBJECTS_SUCCESS,
 } from "../Actions/Types";
 
 const initialState = {
@@ -53,6 +55,7 @@ export default function (state = initialState, action) {
     case FETCH_USER_SCORE_FAIL:
     case FETCH_TEST_RESULTS_FAIL:
     case FETCH_TOTAL_STUDY_TIME_FAIL:
+    case FETCH_ALL_SUBJECTS_FAIL:
       return {
         ...state,
         error: action.payload,
