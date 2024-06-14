@@ -22,6 +22,8 @@ import {
   FETCH_TOTAL_STUDY_TIME_FAIL,
   FETCH_ALL_SUBJECTS_SUCCESS,
   FETCH_ALL_SUBJECTS_FAIL,
+  FETCH_SUBJECT_QUESTIONS_FAIL,
+  FETCH_SUBJECT_QUESTIONS_SUCCESS,
 } from "./Types";
 
 // Action to start a test
@@ -43,6 +45,26 @@ export const startTest =
       .catch((err) => {
         dispatch(returnErrors(err.response.data, err.response.status));
         dispatch({ type: START_TEST_FAIL });
+      });
+  };
+
+// Action to fetch subject questions
+export const fetchSubjectQuestions =
+  (test_instance_id) => (dispatch, getState) => {
+    axios
+      .get(
+        `/api/quiz/exams/subject-questions/${test_instance_id}/`,
+        tokenConfig(getState)
+      )
+      .then((res) =>
+        dispatch({
+          type: FETCH_SUBJECT_QUESTIONS_SUCCESS,
+          payload: res.data,
+        })
+      )
+      .catch((err) => {
+        dispatch(returnErrors(err.response.data, err.response.status));
+        dispatch({ type: FETCH_SUBJECT_QUESTIONS_FAIL });
       });
   };
 
