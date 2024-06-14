@@ -53,7 +53,7 @@ export const fetchSubjectQuestions =
   (test_instance_id) => (dispatch, getState) => {
     axios
       .get(
-        `/api/quiz/exams/subject-questions/${test_instance_id}/`,
+        `/api/quiz/exams/questions/${test_instance_id}/`,
         tokenConfig(getState)
       )
       .then((res) =>
