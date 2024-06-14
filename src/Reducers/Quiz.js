@@ -20,15 +20,21 @@ import {
   FETCH_TOTAL_STUDY_TIME_FAIL,
   FETCH_ALL_SUBJECTS_FAIL,
   FETCH_ALL_SUBJECTS_SUCCESS,
+  FETCH_SUBJECT_QUESTIONS_SUCCESS,
+  FETCH_SUBJECT_QUESTIONS_FAIL,
+  FETCH_INDIVIDUAL_SUBJECT_QUESTION_SUCCESS,
+  FETCH_INDIVIDUAL_SUBJECT_QUESTION_FAIL,
 } from "../Actions/Types";
 
 const initialState = {
   testInstances: [],
   completedTests: [],
-  allTests: [],
-  individualQuestion: {},
+  allTests: null,
+  individualQuestion: null,
   userScores: {},
   totalStudyTime: null,
+  subjects: [],
+  subjectQuestions: [],
   loading: false,
   error: null,
 };
@@ -56,6 +62,8 @@ export default function (state = initialState, action) {
     case FETCH_TEST_RESULTS_FAIL:
     case FETCH_TOTAL_STUDY_TIME_FAIL:
     case FETCH_ALL_SUBJECTS_FAIL:
+    case FETCH_SUBJECT_QUESTIONS_FAIL:
+    case FETCH_INDIVIDUAL_SUBJECT_QUESTION_FAIL:
       return {
         ...state,
         error: action.payload,
@@ -64,19 +72,14 @@ export default function (state = initialState, action) {
     case SUBMIT_ANSWER_SUCCESS:
       return {
         ...state,
-        individualQuestion: {
-          ...state.individualQuestion,
-          [action.payload.question_id]: action.payload,
-        },
-        loading: false,
+        answer: action.payload,
+        error: null,
       };
     case COMPLETE_TEST_SUCCESS:
       return {
         ...state,
-        testInstances: state.testInstances.map((test) =>
-          test.id === action.payload.id ? action.payload : test
-        ),
-        loading: false,
+        testInstance: action.payload,
+        error: null,
       };
     case FETCH_COMPLETED_TESTS_SUCCESS:
       return {
@@ -131,6 +134,19 @@ export default function (state = initialState, action) {
         ...state,
         subjects: action.payload,
         loading: false,
+      };
+    case FETCH_SUBJECT_QUESTIONS_SUCCESS:
+      return {
+        ...state,
+        subjectQuestions: action.payload,
+        loading: false,
+      };
+    case FETCH_INDIVIDUAL_SUBJECT_QUESTION_SUCCESS:
+      return {
+        ...state,
+        individualQuestion: action.payload,
+        loading: false,
+        error: null,
       };
     default:
       return state;
