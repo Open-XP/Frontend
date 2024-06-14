@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import {
-  XMarkIcon,
-  InformationCircleIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/24/solid";
+import { XMarkIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 import { connect } from "react-redux";
 import { fetchAllSubjects, startTest } from "../../../Actions/Quiz";
+import { withRouterHooks } from "../../../withRouters/withRoutersHook";
 
 class ExamSetter extends Component {
   static propTypes = {
@@ -15,6 +12,7 @@ class ExamSetter extends Component {
     subjects: PropTypes.array.isRequired,
     startTest: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
+    navigate: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -58,12 +56,18 @@ class ExamSetter extends Component {
   };
 
   handleStartTest = () => {
-    if (this.state.selectedSubject && this.state.selectedYear) {
-      this.props.startTest(
-        1,
-        this.state.selectedSubject.name,
-        this.state.selectedYear
-      );
+    const { selectedSubject, selectedYear } = this.state;
+    if (selectedSubject && selectedYear) {
+      this.props
+        .startTest(1, selectedSubject.name, selectedYear)
+        .then((data) => {
+          this.props.onClose();
+          this.props.navigate(`evaluation/${data.id}`);
+          console.log("Test started with ID:", data.id);
+        })
+        .catch((error) => {
+          console.error("Failed to start test:", error);
+        });
     }
   };
 
@@ -101,9 +105,7 @@ class ExamSetter extends Component {
               <div className="w-[97.5%]">
                 {selectedSubject ? selectedSubject.name : "Select a subject"}
               </div>
-              <div className="w-5 h-5">
-                <ChevronDownIcon />
-              </div>
+              <ChevronDownIcon className="w-5 h-5" />
             </div>
             {subjectDropdownOpen && (
               <div className="absolute top-[4rem] left-0 w-full bg-white border border-gray-300 z-10">
@@ -130,11 +132,9 @@ class ExamSetter extends Component {
                 <div className="w-[97.5%]">
                   {selectedYear || "Select a year"}
                 </div>
-                <div className="w-5 h-5">
-                  <ChevronDownIcon />
-                </div>
+                <ChevronDownIcon className="w-5 h-5" />
               </div>
-              {yearDropdownOpen && selectedSubject && (
+              {yearDropdownOpen && (
                 <div className="absolute top-[4rem] left-0 w-full bg-white border border-gray-300 z-10">
                   {selectedSubject.years.map((yearObj) => (
                     <div
@@ -157,7 +157,7 @@ class ExamSetter extends Component {
           )}
           <Link
             className="flex items-center justify-center w-[80%] h-[4.813rem] text-center text-[2rem] font-[600] text-white bg-[#281266] no-underline"
-            to={"/dashboard/evaluation"}
+            to={`/evaluation/${selectedSubject ? selectedSubject.id : ""}`}
           >
             <button onClick={this.handleStartTest}>Start Test</button>
           </Link>
@@ -171,6 +171,11 @@ const mapStateToProps = (state) => ({
   subjects: state.quiz.subjects,
 });
 
-export default connect(mapStateToProps, { fetchAllSubjects, startTest })(
-  ExamSetter
+const mapDispatchToProps = {
+  fetchAllSubjects,
+  startTest,
+};
+
+export default withRouterHooks(
+  connect(mapStateToProps, mapDispatchToProps)(ExamSetter)
 );
