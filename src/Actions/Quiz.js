@@ -28,7 +28,7 @@ import {
   FETCH_SUBJECT_QUESTIONS_SUCCESS,
   FETCH_INDIVIDUAL_SUBJECT_QUESTION_SUCCESS,
   FETCH_INDIVIDUAL_SUBJECT_QUESTION_FAIL,
-  PERSIST_STATE_ON_PAGE,
+  RESET_QUESTIONS_ON_LEAVE_PAGE,
 } from "./Types";
 
 // Action to start a test
@@ -131,7 +131,7 @@ export const submitAnswer =
 export const completeTest = (test_instance_id) => (dispatch, getState) => {
   axios
     .patch(
-      `/api/exams/complete-test/${test_instance_id}/`,
+      `/api/quiz/exams/complete-test/${test_instance_id}/`,
       {},
       tokenConfig(getState)
     )
@@ -150,7 +150,7 @@ export const completeTest = (test_instance_id) => (dispatch, getState) => {
 // Action to fetch completed tests
 export const fetchCompletedTests = () => (dispatch, getState) => {
   axios
-    .get("/api/exams/completed-tests/", tokenConfig(getState))
+    .get("/api/quiz/exams/completed-tests/", tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: FETCH_COMPLETED_TESTS_SUCCESS,
@@ -242,3 +242,20 @@ export const fetchAllSubjects = () => (dispatch, getState) => {
       dispatch({ type: FETCH_ALL_SUBJECTS_FAIL });
     });
 };
+
+export const deleteTestInstance =
+  (test_instance_id) => (dispatch, getState) => {
+    axios
+      .delete(
+        `/api/quiz/exams/${test_instance_id}/delete/`,
+        tokenConfig(getState)
+      )
+      .then(() => {
+        dispatch({
+          type: RESET_QUESTIONS_ON_LEAVE_PAGE,
+        });
+      })
+      .catch((err) => {
+        dispatch(returnErrors(err.response.data, err.response.status));
+      });
+  };
