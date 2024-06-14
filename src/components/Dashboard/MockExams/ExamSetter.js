@@ -11,7 +11,8 @@ class ExamSetter extends Component {
     fetchAllSubjects: PropTypes.func.isRequired,
     subjects: PropTypes.array.isRequired,
     startTest: PropTypes.func.isRequired,
-    onClose: PropTypes.func.isRequired,
+    testInstances: PropTypes.array.isRequired,
+    // onClose: PropTypes.func.isRequired,
     navigate: PropTypes.func.isRequired,
   };
 
@@ -61,8 +62,11 @@ class ExamSetter extends Component {
       this.props
         .startTest(1, selectedSubject.name, selectedYear)
         .then((data) => {
-          this.props.onClose();
-          this.props.navigate(`evaluation/${data.id}`);
+          // this.props.onClose();
+          if (data !== undefined && data !== null) {
+            this.props.navigate(`evaluation/${data.id}`);
+          }
+
           console.log("Test started with ID:", data.id);
         })
         .catch((error) => {
@@ -155,10 +159,7 @@ class ExamSetter extends Component {
               carefully.
             </div>
           )}
-          <Link
-            className="flex items-center justify-center w-[80%] h-[4.813rem] text-center text-[2rem] font-[600] text-white bg-[#281266] no-underline"
-            to={`/evaluation/${selectedSubject ? selectedSubject.id : ""}`}
-          >
+          <Link className="flex items-center justify-center w-[80%] h-[4.813rem] text-center text-[2rem] font-[600] text-white bg-[#281266] no-underline">
             <button onClick={this.handleStartTest}>Start Test</button>
           </Link>
         </div>
@@ -169,11 +170,13 @@ class ExamSetter extends Component {
 
 const mapStateToProps = (state) => ({
   subjects: state.quiz.subjects,
+  startTest: state.quiz.startTest,
+  testInstances: state.quiz.testInstances,
 });
 
 const mapDispatchToProps = {
-  fetchAllSubjects,
   startTest,
+  fetchAllSubjects,
 };
 
 export default withRouterHooks(
