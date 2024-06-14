@@ -20,6 +20,8 @@ import {
   FETCH_TEST_RESULTS_FAIL,
   FETCH_TOTAL_STUDY_TIME_SUCCESS,
   FETCH_TOTAL_STUDY_TIME_FAIL,
+  FETCH_ALL_SUBJECTS_SUCCESS,
+  FETCH_ALL_SUBJECTS_FAIL,
 } from "./Types";
 
 // Action to start a test
@@ -182,5 +184,21 @@ export const fetchTotalStudyTime = () => (dispatch, getState) => {
     .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({ type: FETCH_TOTAL_STUDY_TIME_FAIL });
+    });
+};
+
+// Action to get all subjects
+export const fetchAllSubjects = () => (dispatch, getState) => {
+  axios
+    .get("/api/quiz/subjects/", tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: FETCH_ALL_SUBJECTS_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({ type: FETCH_ALL_SUBJECTS_FAIL });
     });
 };
