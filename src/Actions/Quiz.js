@@ -33,7 +33,7 @@ export const startTest =
       year: year_value,
     });
     axios
-      .post("/api/exams/start-test/", body, tokenConfig(getState))
+      .post("/api/quiz/exams/start-test/", body, tokenConfig(getState))
       .then((res) =>
         dispatch({
           type: START_TEST_SUCCESS,
@@ -54,7 +54,7 @@ export const submitAnswer =
       selected_option: selected_option,
     });
     axios
-      .post("/api/exams/submit-answer/", body, tokenConfig(getState))
+      .post("/api/quiz/exams/submit-answer/", body, tokenConfig(getState))
       .then((res) =>
         dispatch({
           type: SUBMIT_ANSWER_SUCCESS,
