@@ -1,20 +1,34 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   XMarkIcon,
   InformationCircleIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/solid";
+import { connect } from "react-redux";
+import { fetchAllSubjects, startTest } from "../../../Actions/Quiz";
 
-export default class ExamSetter extends Component {
+class ExamSetter extends Component {
+  static propTypes = {
+    fetchAllSubjects: PropTypes.func.isRequired,
+    subjects: PropTypes.array.isRequired,
+    startTest: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       subjectDropdownOpen: false,
       yearDropdownOpen: false,
-      selectedSubject: "",
-      selectedYear: "",
+      selectedSubject: null,
+      selectedYear: null,
     };
+  }
+
+  componentDidMount() {
+    this.props.fetchAllSubjects();
   }
 
   toggleSubjectDropdown = () => {
@@ -43,17 +57,25 @@ export default class ExamSetter extends Component {
     });
   };
 
+  handleStartTest = () => {
+    if (this.state.selectedSubject && this.state.selectedYear) {
+      this.props.startTest(
+        1,
+        this.state.selectedSubject.name,
+        this.state.selectedYear
+      );
+    }
+  };
+
   render() {
-    const { onClose } = this.props;
     const {
       subjectDropdownOpen,
       yearDropdownOpen,
       selectedSubject,
       selectedYear,
     } = this.state;
+    const { subjects } = this.props;
     const isSelectionComplete = selectedSubject && selectedYear;
-    const subjects = ["Mathematics", "English", "Biology", "Chemistry"];
-    const years = ["2010", "2011", "2012", "2013"];
 
     return (
       <div className="flex w-screen h-screen fixed bg-gray-300 bg-opacity-50 drop-shadow-2xl backdrop-blur-sm justify-center -mt-[3.2rem]">
@@ -62,18 +84,12 @@ export default class ExamSetter extends Component {
             <div className="flex items-center text-[2rem] font-[600]">
               Pick Subject of Your Choice
             </div>
-            <button onClick={onClose} className="w-[2.5rem] h-[2.5rem]">
+            <button
+              onClick={this.props.onClose}
+              className="w-[2.5rem] h-[2.5rem]"
+            >
               <XMarkIcon />
             </button>
-          </div>
-          <div className="flex w-[80%] gap-4">
-            <div className="flex w-[2.313rem] h-[2.313rem] items-center">
-              <InformationCircleIcon />
-            </div>
-            <div className="text-[0.813rem] font-[400]">
-              Choose the Subject you would like to take a test on, with our wide
-              range of materials and past questions
-            </div>
           </div>
           <div className="flex flex-col w-[80%] gap-2 relative">
             <div className="text-[1rem] font-[400]">Subject</div>
@@ -83,9 +99,9 @@ export default class ExamSetter extends Component {
               onClick={this.toggleSubjectDropdown}
             >
               <div className="w-[97.5%]">
-                {selectedSubject || "Select a subject"}
+                {selectedSubject ? selectedSubject.name : "Select a subject"}
               </div>
-              <div className="w-[0.762rem] h-[0.415]">
+              <div className="w-5 h-5">
                 <ChevronDownIcon />
               </div>
             </div>
@@ -93,42 +109,46 @@ export default class ExamSetter extends Component {
               <div className="absolute top-[4rem] left-0 w-full bg-white border border-gray-300 z-10">
                 {subjects.map((subject) => (
                   <div
-                    key={subject}
+                    key={subject.name}
                     className="px-3 py-2 cursor-pointer hover:bg-gray-200"
                     onClick={() => this.setSelectedSubject(subject)}
                   >
-                    {subject}
+                    {subject.name}
                   </div>
                 ))}
               </div>
             )}
           </div>
-          <div className="flex flex-col w-[80%] gap-2 relative">
-            <div className="text-[1rem] font-[400]">Past Question Year</div>
-            <div
-              className="flex items-center h-[2.938rem] px-3 cursor-pointer"
-              style={{ backgroundColor: "rgba(60, 60, 60, 0.09)" }}
-              onClick={this.toggleYearDropdown}
-            >
-              <div className="w-[97.5%]">{selectedYear || "Select a year"}</div>
-              <div className="w-[0.762rem] h-[0.415]">
-                <ChevronDownIcon />
+          {selectedSubject && (
+            <div className="flex flex-col w-[80%] gap-2 relative">
+              <div className="text-[1rem] font-[400]">Past Question Year</div>
+              <div
+                className="flex items-center h-[2.938rem] px-3 cursor-pointer"
+                style={{ backgroundColor: "rgba(60, 60, 60, 0.09)" }}
+                onClick={this.toggleYearDropdown}
+              >
+                <div className="w-[97.5%]">
+                  {selectedYear || "Select a year"}
+                </div>
+                <div className="w-5 h-5">
+                  <ChevronDownIcon />
+                </div>
               </div>
+              {yearDropdownOpen && selectedSubject && (
+                <div className="absolute top-[4rem] left-0 w-full bg-white border border-gray-300 z-10">
+                  {selectedSubject.years.map((yearObj) => (
+                    <div
+                      key={yearObj.year}
+                      className="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                      onClick={() => this.setSelectedYear(yearObj.year)}
+                    >
+                      {yearObj.year}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-            {yearDropdownOpen && (
-              <div className="absolute top-[4rem] left-0 w-full bg-white border border-gray-300 z-10">
-                {years.map((year) => (
-                  <div
-                    key={year}
-                    className="px-3 py-2 cursor-pointer hover:bg-gray-200"
-                    onClick={() => this.setSelectedYear(year)}
-                  >
-                    {year}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          )}
           {isSelectionComplete && (
             <div className="w-[80%]" style={{ color: "red" }}>
               Are you sure you picked the right subject and year? Look over it
@@ -139,10 +159,18 @@ export default class ExamSetter extends Component {
             className="flex items-center justify-center w-[80%] h-[4.813rem] text-center text-[2rem] font-[600] text-white bg-[#281266] no-underline"
             to={"/dashboard/evaluation"}
           >
-            <button className="">Start Test</button>
+            <button onClick={this.handleStartTest}>Start Test</button>
           </Link>
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  subjects: state.quiz.subjects,
+});
+
+export default connect(mapStateToProps, { fetchAllSubjects, startTest })(
+  ExamSetter
+);
