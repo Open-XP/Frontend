@@ -123,6 +123,12 @@ export default function (state = initialState, action) {
         totalStudyTime: action.payload,
         loading: false,
       };
+    case FETCH_ALL_SUBJECTS_SUCCESS:
+      return {
+        ...state,
+        subjects: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }
