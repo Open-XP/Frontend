@@ -3,9 +3,21 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchTotalStudyTime } from "../../../Actions/Quiz";
 
-export default class DashboardHome extends Component {
-  static propTypes = {};
+export class DashboardHome extends Component {
+  static propTypes = {
+    fetchTotalStudyTime: PropTypes.func.isRequired,
+    totalStudyTime: PropTypes.object,
+  };
+
+  componentDidMount() {
+    this.props.fetchTotalStudyTime();
+  }
+
   render() {
+    const { totalStudyTime } = this.props;
+    const studyDuration = totalStudyTime
+      ? totalStudyTime.overall_study_time
+      : "Loading...";
     return (
       <div className="flex w-full h-full flex-col pb-8 gap-4 max-w-7xl">
         <div className="flex flex-col">
@@ -44,7 +56,7 @@ export default class DashboardHome extends Component {
             <div className="flex flex-col w-full 2xl:w-1/3 h-100 rounded-2x gap-3 justify-center p-4">
               <div className="p-3 flex flex-col rounded-xl bg-[#2D9CDB] text-white">
                 <div className="text-xl font-extrabold">Study Duration:</div>
-                <div className="font-bold text-lg">60hrs</div>
+                <div className="font-bold text-lg">{studyDuration}</div>
               </div>
               <div className="p-3 flex flex-col rounded-xl bg-[#2D9CDB] text-white">
                 <div className="text-xl font-extrabold">Study Ranking:</div>
@@ -61,3 +73,9 @@ export default class DashboardHome extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  totalStudyTime: state.quiz.totalStudyTime,
+});
+
+export default connect(mapStateToProps, { fetchTotalStudyTime })(DashboardHome);
