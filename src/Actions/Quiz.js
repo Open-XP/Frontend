@@ -1,6 +1,8 @@
+// Actions.js
 import { tokenConfig } from "./Auth";
 import axios from "axios";
 import { returnErrors } from "./Messages";
+import { persistor } from "../Store/Store";
 import {
   START_TEST_SUCCESS,
   START_TEST_FAIL,
@@ -26,6 +28,7 @@ import {
   FETCH_SUBJECT_QUESTIONS_SUCCESS,
   FETCH_INDIVIDUAL_SUBJECT_QUESTION_SUCCESS,
   FETCH_INDIVIDUAL_SUBJECT_QUESTION_FAIL,
+  PERSIST_STATE_ON_PAGE,
 } from "./Types";
 
 // Action to start a test
@@ -47,6 +50,10 @@ export const startTest =
         type: START_TEST_SUCCESS,
         payload: res.data,
       });
+
+      // Optionally persist state immediately after starting the test
+      // persistor.persist();
+
       return res.data; // This return allows the component to use the response data, including the id
     } catch (err) {
       dispatch(returnErrors(err.response.data, err.response.status));
@@ -58,20 +65,24 @@ export const startTest =
 // Action to fetch subject questions
 export const fetchSubjectQuestions =
   (test_instance_id) => (dispatch, getState) => {
-    axios
+    // Return the Axios promise chain
+    return axios
       .get(
         `/api/quiz/exams/questions/${test_instance_id}/`,
         tokenConfig(getState)
       )
-      .then((res) =>
+      .then((res) => {
         dispatch({
           type: FETCH_SUBJECT_QUESTIONS_SUCCESS,
           payload: res.data,
-        })
-      )
+        });
+        return res; // Optional: return response to the caller
+      })
       .catch((err) => {
         dispatch(returnErrors(err.response.data, err.response.status));
         dispatch({ type: FETCH_SUBJECT_QUESTIONS_FAIL });
+        // Optional: throw an error to be caught by the caller
+        throw err;
       });
   };
 
@@ -80,7 +91,7 @@ export const fetchIndividualSubjectQuestion =
   (test_instance_id, question_id) => (dispatch, getState) => {
     axios
       .get(
-        `/api/quiz/exams/questions/${test_instance_id}/${question_id}/`,
+        `/api/quiz/exams/test-instances/${test_instance_id}/questions/${question_id}/`,
         tokenConfig(getState)
       )
       .then((res) =>
@@ -167,26 +178,6 @@ export const fetchAllTestInstances = () => (dispatch, getState) => {
       dispatch({ type: FETCH_ALL_TEST_INSTANCES_FAIL });
     });
 };
-
-// Action to retrieve an individual question
-export const retrieveIndividualQuestion =
-  (test_instance_id, question_id) => (dispatch, getState) => {
-    axios
-      .get(
-        `/api/exams/test-instances/${test_instance_id}/questions/${question_id}/`,
-        tokenConfig(getState)
-      )
-      .then((res) =>
-        dispatch({
-          type: RETRIEVE_INDIVIDUAL_QUESTION_SUCCESS,
-          payload: res.data,
-        })
-      )
-      .catch((err) => {
-        dispatch(returnErrors(err.response.data, err.response.status));
-        dispatch({ type: RETRIEVE_INDIVIDUAL_QUESTION_FAIL });
-      });
-  };
 
 // Action to get user score
 export const fetchUserScore = (test_instance_id) => (dispatch, getState) => {
