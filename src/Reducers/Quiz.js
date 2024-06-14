@@ -25,6 +25,7 @@ import {
   FETCH_SUBJECT_QUESTIONS_FAIL,
   FETCH_INDIVIDUAL_SUBJECT_QUESTION_SUCCESS,
   FETCH_INDIVIDUAL_SUBJECT_QUESTION_FAIL,
+  RESET_QUESTIONS_ON_LEAVE_PAGE,
 } from "../Actions/Types";
 
 const initialState = {
@@ -147,6 +148,11 @@ export default function (state = initialState, action) {
         ...state,
         subjectQuestions: action.payload,
         loading: false,
+      };
+    case RESET_QUESTIONS_ON_LEAVE_PAGE:
+      return {
+        ...state,
+        subjectQuestions: [],
       };
     default:
       return state;
