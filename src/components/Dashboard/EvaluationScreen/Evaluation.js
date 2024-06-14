@@ -9,6 +9,7 @@ import {
   startTest,
   completeTest,
   deleteTestInstance,
+  submitAnswer,
 } from "../../../Actions/Quiz";
 import { resetStateOnLeavePage } from "../../../Actions/Reset";
 
@@ -23,6 +24,7 @@ class Evaluation extends Component {
     completeTest: PropTypes.func.isRequired,
     resetStateOnLeavePage: PropTypes.func.isRequired,
     navigate: PropTypes.func.isRequired,
+    submitAnswer: PropTypes.func.isRequired,
   };
 
   state = {
@@ -31,6 +33,7 @@ class Evaluation extends Component {
     loading: true,
     nextIndex: 0,
     remainingTime: null,
+    selectedOptions: {},
   };
 
   timerInterval = null;
@@ -53,7 +56,6 @@ class Evaluation extends Component {
         () => {
           if (this.state.remainingTime <= 0) {
             this.stopTimer();
-            // Handle timeout or completion
             this.handleTimesUp();
           }
         }
@@ -110,10 +112,28 @@ class Evaluation extends Component {
       return { currentQuestionIndex: newIndex };
     });
   };
-  handleOptionChange = (option) => {
-    this.setState({ selectedOption: option });
-  };
 
+  handleOptionChange = (option) => {
+    const { subjectQuestions } = this.props;
+    const questionId = subjectQuestions[this.state.currentQuestionIndex].id;
+
+    this.setState(
+      (prevState) => ({
+        selectedOptions: {
+          ...prevState.selectedOptions,
+          [questionId]: option, // Store the option selected for each question
+        },
+      }),
+      () => {
+        // Optionally submit the answer after setting state
+        this.props.submitAnswer(
+          this.props.testInstances.id,
+          questionId,
+          option
+        );
+      }
+    );
+  };
   handleCancelTest = () => {
     const shouldCancel = window.confirm(
       "Are you sure you want to cancel the test? This action cannot be undone."
@@ -146,7 +166,7 @@ class Evaluation extends Component {
 
   renderQuestion = () => {
     const { subjectQuestions } = this.props;
-    const { currentQuestionIndex } = this.state;
+    const { currentQuestionIndex, selectedOptions } = this.state;
 
     if (this.state.loading) {
       return <div>Loading questions...</div>;
@@ -157,6 +177,9 @@ class Evaluation extends Component {
     }
 
     const currentQuestion = subjectQuestions[currentQuestionIndex];
+    const questionId = currentQuestion.id;
+    const selectedOption = selectedOptions[questionId];
+
     const options = [
       currentQuestion.option_A,
       currentQuestion.option_B,
@@ -164,7 +187,6 @@ class Evaluation extends Component {
       currentQuestion.option_D,
       currentQuestion.option_E,
     ].filter((option) => option !== undefined && option !== "");
-
     return (
       <div className="flex flex-col gap-4 mt-4">
         <div className="font-[500] h-fit text-[2.25rem]">
@@ -174,9 +196,9 @@ class Evaluation extends Component {
           <div key={index} className="flex items-center gap-4">
             <input
               type="radio"
-              name="option"
+              name={`option-${questionId}`}
               className="w-[1.938rem] h-[1.938rem]"
-              checked={this.state.selectedOption === option}
+              checked={selectedOption === option}
               onChange={() => this.handleOptionChange(option)}
             />
             <div className="font-[600] text-[2rem]">{option}</div>
@@ -185,7 +207,6 @@ class Evaluation extends Component {
       </div>
     );
   };
-
   render() {
     const { currentQuestionIndex, subjectQuestions, testInstances } =
       this.props;
@@ -267,6 +288,7 @@ class Evaluation extends Component {
 const mapStateToProps = (state) => ({
   subjectQuestions: state.quiz.subjectQuestions,
   testInstances: state.quiz.testInstances,
+  submitAnswer: state.quiz.submitAnswer,
 });
 
 const mapDispatchToProps = {
@@ -275,6 +297,7 @@ const mapDispatchToProps = {
   completeTest,
   resetStateOnLeavePage,
   deleteTestInstance,
+  submitAnswer,
 };
 
 export default withRouterHooks(
