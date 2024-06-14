@@ -4,77 +4,95 @@ import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouterHooks } from "../../../withRouters/withRoutersHook";
-import {
-  fetchSubjectQuestions, // Assuming this fetches all questions for a subject
-  fetchIndividualSubjectQuestion, // Assuming this fetches details for a single question
-} from "../../../Actions/Quiz";
+import { fetchSubjectQuestions, startTest } from "../../../Actions/Quiz";
 
 class Evaluation extends Component {
   static propTypes = {
+    subjectQuestions: PropTypes.array.isRequired,
+    testInstances: PropTypes.object.isRequired,
+    startTest: PropTypes.func.isRequired,
+    navigate: PropTypes.func.isRequired,
     fetchSubjectQuestions: PropTypes.func.isRequired,
-    fetchIndividualSubjectQuestion: PropTypes.func.isRequired,
-    questions: PropTypes.array,
-    question: PropTypes.object,
-    testinstance: PropTypes.object.isRequired, // Making sure testinstance is marked as required
   };
 
   state = {
     currentQuestionIndex: 0,
     selectedOption: null,
+    loading: true,
+    nextIndex: 0,
   };
 
   componentDidMount() {
-    const { fetchSubjectQuestions, testinstance } = this.props;
-    if (testinstance && testinstance.subject) {
-      fetchSubjectQuestions(testinstance.subject, testinstance.year);
+    const { testInstances, fetchSubjectQuestions } = this.props;
+    if (testInstances && testInstances.id) {
+      this.setState({ loading: true }); // Set loading to true before fetching data
+      fetchSubjectQuestions(testInstances.id)
+        .then((data) => {
+          this.setState({ loading: false }); // Set loading to false after data is fetched
+        })
+        .catch((error) => {
+          console.error("Fetching questions failed:", error);
+          this.setState({ loading: false }); // Ensure loading is set to false even if there is an error
+        });
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // Fetch individual question when moving to next or previous
-    const { currentQuestionIndex } = this.state;
-    if (currentQuestionIndex !== prevState.currentQuestionIndex) {
-      const { fetchIndividualSubjectQuestion, questions } = this.props;
-      if (questions.length > 0) {
-        fetchIndividualSubjectQuestion(
-          questions[currentQuestionIndex].id // Assuming each question has a unique ID
-        );
-      }
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   // Check if subjectQuestions has been updated
+  //   if (prevProps.subjectQuestions !== this.props.subjectQuestions) {
+  //     console.log(
+  //       "Question count updated:",
+  //       this.props.subjectQuestions.length
+  //     );
+  //   }
+  // }
 
   handleNextQuestion = () => {
-    const { currentQuestionIndex } = this.state;
-    const { questions } = this.props;
-    if (currentQuestionIndex < questions.length - 1) {
-      this.setState({
-        currentQuestionIndex: currentQuestionIndex + 1,
-        selectedOption: null,
-      });
-    }
+    this.setState((prevState, props) => {
+      const nextIndex = prevState.currentQuestionIndex + 1;
+      if (nextIndex < props.subjectQuestions.length) {
+        return { currentQuestionIndex: nextIndex };
+      }
+    });
   };
 
   handlePreviousQuestion = () => {
-    this.setState((prevState) => ({
-      currentQuestionIndex: Math.max(0, prevState.currentQuestionIndex - 1),
-      selectedOption: null,
-    }));
+    this.setState((prevState) => {
+      const newIndex = Math.max(0, prevState.currentQuestionIndex - 1);
+      return { currentQuestionIndex: newIndex };
+    });
   };
-
   handleOptionChange = (option) => {
     this.setState({ selectedOption: option });
   };
 
   renderQuestion = () => {
-    const { question } = this.props;
-    if (!question) {
-      return <div>Loading question...</div>;
+    const { subjectQuestions } = this.props;
+    const { currentQuestionIndex } = this.state;
+
+    if (this.state.loading) {
+      return <div>Loading questions...</div>;
     }
+
+    if (!subjectQuestions || subjectQuestions.length === 0) {
+      return <div>No questions available.</div>;
+    }
+
+    const currentQuestion = subjectQuestions[currentQuestionIndex];
+    const options = [
+      currentQuestion.option_A,
+      currentQuestion.option_B,
+      currentQuestion.option_C,
+      currentQuestion.option_D,
+      currentQuestion.option_E,
+    ].filter((option) => option !== undefined && option !== "");
 
     return (
       <div className="flex flex-col gap-4 mt-4">
-        <div className="font-[500] h-fit text-[2.25rem]">{question.text}</div>
-        {question.options.map((option, index) => (
+        <div className="font-[500] h-fit text-[2.25rem]">
+          {currentQuestion.question}
+        </div>
+        {options.map((option, index) => (
           <div key={index} className="flex items-center gap-4">
             <input
               type="radio"
@@ -91,12 +109,14 @@ class Evaluation extends Component {
   };
 
   render() {
-    const { currentQuestionIndex, questions } = this.props; // Assuming questions array is in props
-    const totalQuestions = questions ? questions.length : 0;
-    const question = questions[currentQuestionIndex]; // Make sure to extract the current question like this
+    const { currentQuestionIndex, subjectQuestions, testInstances } =
+      this.props;
+    const totalQuestions = subjectQuestions.length;
+    const displayIndex = this.state.currentQuestionIndex + 1;
+    console.log("The question number is:", displayIndex);
 
     return (
-      <div className="flex flex-col w-screen h-screen -m-[9.9rem]">
+      <div className=" flex flex-col w-screen h-screen -m-[9.9rem]">
         <div className="flex w-screen justify-center shadow-xl">
           <div className="flex flex-row w-[80%] h-[6.375rem] justify-between items-center">
             <div className="flex gap-4 items-center">
@@ -106,8 +126,8 @@ class Evaluation extends Component {
                 </button>
               </Link>
               <div className="font-[700] text-[1.5rem]">
-                {question && question.subject} Question:{" "}
-                {question && question.year}
+                {testInstances && testInstances.subject} Question:{" "}
+                {testInstances.year}
               </div>
             </div>
             <div className="flex text-[#2D9CDB] text-[1.5rem] font-[700] items-center">
@@ -118,7 +138,7 @@ class Evaluation extends Component {
         <div className="flex w-screen justify-center mt-[8.25rem]">
           <div className="flex flex-col w-[80%] mt-[rem] gap-4">
             <div className="font-[400] text-[#3C3C3C] text-[1.5rem]">
-              Question {currentQuestionIndex + 1}/{totalQuestions}
+              Question {displayIndex}/{totalQuestions}
             </div>
             {this.renderQuestion()}
             <div className="flex justify-between pt-[3rem]">
@@ -145,14 +165,13 @@ class Evaluation extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  questions: state.quiz.questions,
-  question: state.quiz.question,
-  testinstance: state.quiz.testinstance,
+  subjectQuestions: state.quiz.subjectQuestions,
+  testInstances: state.quiz.testInstances,
 });
 
 const mapDispatchToProps = {
   fetchSubjectQuestions,
-  fetchIndividualSubjectQuestion,
+  startTest,
 };
 
 export default withRouterHooks(
