@@ -172,7 +172,7 @@ export const fetchTestResults = (test_instance_id) => (dispatch, getState) => {
 // Action to get total study time
 export const fetchTotalStudyTime = () => (dispatch, getState) => {
   axios
-    .get("/api/exams/total-study-time/", tokenConfig(getState))
+    .get("/api/quiz/exams/total-study-time/", tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: FETCH_TOTAL_STUDY_TIME_SUCCESS,
