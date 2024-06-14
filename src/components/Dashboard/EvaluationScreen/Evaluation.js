@@ -4,7 +4,13 @@ import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouterHooks } from "../../../withRouters/withRoutersHook";
-import { fetchSubjectQuestions, startTest } from "../../../Actions/Quiz";
+import {
+  fetchSubjectQuestions,
+  startTest,
+  completeTest,
+  deleteTestInstance,
+} from "../../../Actions/Quiz";
+import { resetStateOnLeavePage } from "../../../Actions/Reset";
 
 class Evaluation extends Component {
   static propTypes = {
@@ -13,6 +19,10 @@ class Evaluation extends Component {
     startTest: PropTypes.func.isRequired,
     navigate: PropTypes.func.isRequired,
     fetchSubjectQuestions: PropTypes.func.isRequired,
+    deleteTestInstance: PropTypes.func.isRequired,
+    completeTest: PropTypes.func.isRequired,
+    resetStateOnLeavePage: PropTypes.func.isRequired,
+    navigate: PropTypes.func.isRequired,
   };
 
   state = {
@@ -20,20 +30,58 @@ class Evaluation extends Component {
     selectedOption: null,
     loading: true,
     nextIndex: 0,
+    remainingTime: null,
+  };
+
+  timerInterval = null;
+
+  handleTimesUp = () => {
+    this.props.completeTest(this.props.testInstances.id);
+    this.props.navigate("/summary");
+  };
+
+  componentWillUnmount() {
+    this.stopTimer();
+  }
+
+  startTimer = () => {
+    this.timerInterval = setInterval(() => {
+      this.setState(
+        (prevState) => ({
+          remainingTime: prevState.remainingTime - 1,
+        }),
+        () => {
+          if (this.state.remainingTime <= 0) {
+            this.stopTimer();
+            // Handle timeout or completion
+            this.handleTimesUp();
+          }
+        }
+      );
+    }, 1000);
+  };
+
+  stopTimer = () => {
+    clearInterval(this.timerInterval);
   };
 
   componentDidMount() {
     const { testInstances, fetchSubjectQuestions } = this.props;
     if (testInstances && testInstances.id) {
-      this.setState({ loading: true }); // Set loading to true before fetching data
+      this.setState({ loading: true });
       fetchSubjectQuestions(testInstances.id)
         .then((data) => {
-          this.setState({ loading: false }); // Set loading to false after data is fetched
+          this.setState({ loading: false });
         })
         .catch((error) => {
           console.error("Fetching questions failed:", error);
-          this.setState({ loading: false }); // Ensure loading is set to false even if there is an error
+          this.setState({ loading: false });
         });
+    }
+    const { duration } = this.props.testInstances;
+    if (duration) {
+      this.setState({ remainingTime: duration });
+      this.startTimer();
     }
   }
 
@@ -64,6 +112,36 @@ class Evaluation extends Component {
   };
   handleOptionChange = (option) => {
     this.setState({ selectedOption: option });
+  };
+
+  handleCancelTest = () => {
+    const shouldCancel = window.confirm(
+      "Are you sure you want to cancel the test? This action cannot be undone."
+    );
+
+    if (shouldCancel) {
+      const testInstanceId = this.props.testInstances.id;
+
+      this.props.resetStateOnLeavePage();
+      this.props.deleteTestInstance(testInstanceId);
+      this.props.navigate("/dashboard");
+    }
+  };
+
+  handleCompleteTest = () => {
+    const shouldComplete = window.confirm(
+      "Are you sure you want to submit your answers?"
+    );
+    const { testInstances } = this.props;
+    if (testInstances && testInstances.id && shouldComplete) {
+      this.props.completeTest(testInstances.id);
+      this.props.navigate("/summary");
+    }
+  };
+
+  handleTimesUp = () => {
+    this.props.completeTest(this.props.testInstances.id);
+    this.props.navigate("/summary");
   };
 
   renderQuestion = () => {
@@ -113,25 +191,30 @@ class Evaluation extends Component {
       this.props;
     const totalQuestions = subjectQuestions.length;
     const displayIndex = this.state.currentQuestionIndex + 1;
-    console.log("The question number is:", displayIndex);
+    const { remainingTime } = this.state;
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = remainingTime % 60;
 
     return (
       <div className=" flex flex-col w-screen h-screen -m-[9.9rem]">
         <div className="flex w-screen justify-center shadow-xl">
           <div className="flex flex-row w-[80%] h-[6.375rem] justify-between items-center">
             <div className="flex gap-4 items-center">
-              <Link to={"/dashboard"}>
-                <button className="flex w-[1.8rem] h-[1.8rem]">
-                  <ArrowLeftIcon />
-                </button>
-              </Link>
+              <button
+                onClick={this.handleCancelTest}
+                className="flex w-[1.8rem] h-[1.8rem]"
+              >
+                <ArrowLeftIcon />
+              </button>
               <div className="font-[700] text-[1.5rem]">
                 {testInstances && testInstances.subject} Question:{" "}
                 {testInstances.year}
               </div>
             </div>
             <div className="flex text-[#2D9CDB] text-[1.5rem] font-[700] items-center">
-              <div>Timer: 25mins Left</div>
+              <div>
+                Timer: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+              </div>
             </div>
           </div>
         </div>
@@ -142,19 +225,36 @@ class Evaluation extends Component {
             </div>
             {this.renderQuestion()}
             <div className="flex justify-between pt-[3rem]">
-              <button
-                className="bg-[#281266] w-[12.25rem] h-[4.5rem] rounded-lg font-[700] text-white text-[1.5rem]"
-                onClick={this.handlePreviousQuestion}
-                disabled={currentQuestionIndex === 0}
-              >
-                Previous
-              </button>
+              {this.state.currentQuestionIndex > 0 && (
+                <button
+                  className="bg-[#281266] w-[12.25rem] h-[4.5rem] rounded-lg font-[700] text-white text-[1.5rem]"
+                  onClick={this.handlePreviousQuestion}
+                >
+                  Previous
+                </button>
+              )}
+              {/* Always render the Next or Submit button */}
               <button
                 className="bg-[#BBE6FF] w-[12.25rem] h-[4.5rem] rounded-lg font-[700] text-[1.5rem]"
-                onClick={this.handleNextQuestion}
-                disabled={currentQuestionIndex === totalQuestions - 1}
+                onClick={() => {
+                  // Check if it's the last question
+                  if (
+                    this.state.currentQuestionIndex ===
+                    this.props.subjectQuestions.length - 1
+                  ) {
+                    this.handleCompleteTest(); // Call complete test on last question
+                  } else {
+                    this.handleNextQuestion(); // Otherwise, go to the next question
+                  }
+                }}
+                disabled={this.state.loading} // Disable during loading state, if any
               >
-                Next
+                {
+                  this.state.currentQuestionIndex ===
+                  this.props.subjectQuestions.length - 1
+                    ? "Submit" // Text for the last question
+                    : "Next" // Text for other questions
+                }
               </button>
             </div>
           </div>
@@ -172,6 +272,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   fetchSubjectQuestions,
   startTest,
+  completeTest,
+  resetStateOnLeavePage,
+  deleteTestInstance,
 };
 
 export default withRouterHooks(
