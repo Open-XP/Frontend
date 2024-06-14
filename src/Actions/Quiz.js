@@ -24,28 +24,35 @@ import {
   FETCH_ALL_SUBJECTS_FAIL,
   FETCH_SUBJECT_QUESTIONS_FAIL,
   FETCH_SUBJECT_QUESTIONS_SUCCESS,
+  FETCH_INDIVIDUAL_SUBJECT_QUESTION_SUCCESS,
+  FETCH_INDIVIDUAL_SUBJECT_QUESTION_FAIL,
 } from "./Types";
 
 // Action to start a test
 export const startTest =
-  (exam_id, subject_name, year_value) => (dispatch, getState) => {
+  (exam_id, subject_name, year_value) => async (dispatch, getState) => {
     const body = JSON.stringify({
       exam: exam_id,
       subject: subject_name,
       year: year_value,
     });
-    axios
-      .post("/api/quiz/exams/start-test/", body, tokenConfig(getState))
-      .then((res) =>
-        dispatch({
-          type: START_TEST_SUCCESS,
-          payload: res.data,
-        })
-      )
-      .catch((err) => {
-        dispatch(returnErrors(err.response.data, err.response.status));
-        dispatch({ type: START_TEST_FAIL });
+
+    try {
+      const res = await axios.post(
+        "/api/quiz/exams/start-test/",
+        body,
+        tokenConfig(getState)
+      );
+      dispatch({
+        type: START_TEST_SUCCESS,
+        payload: res.data,
       });
+      return res.data; // This return allows the component to use the response data, including the id
+    } catch (err) {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({ type: START_TEST_FAIL });
+      throw err; // Propagate the error for further handling in the component
+    }
   };
 
 // Action to fetch subject questions
@@ -66,6 +73,26 @@ export const fetchSubjectQuestions =
         dispatch(returnErrors(err.response.data, err.response.status));
         dispatch({ type: FETCH_SUBJECT_QUESTIONS_FAIL });
       });
+  };
+
+// Action to fetch individual subject question
+export const fetchIndividualSubjectQuestion =
+  (test_instance_id, question_id) => (dispatch, getState) => {
+    axios
+      .get(
+        `/api/quiz/exams/questions/${test_instance_id}/${question_id}/`,
+        tokenConfig(getState)
+      )
+      .then((res) =>
+        dispatch({
+          type: FETCH_INDIVIDUAL_SUBJECT_QUESTION_SUCCESS,
+          payload: res.data,
+        })
+      )
+      .catch((err) => {
+        dispatch(returnErrors(err.response.data, err.response.status));
+        dispatch({ type: FETCH_INDIVIDUAL_SUBJECT_QUESTION_FAIL });
+      }); // Added closing parenthesis here
   };
 
 export const submitAnswer =
