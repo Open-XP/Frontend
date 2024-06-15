@@ -1,6 +1,6 @@
 import React from "react";
 import { BellIcon, MoonIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import { ReactComponent as OpenxpSVG } from "../../../svgs/openxp.svg";
+import OpenxpSVG from "../../../svgs/openxp.js";
 
 export function DashboardNavBar() {
   return (
