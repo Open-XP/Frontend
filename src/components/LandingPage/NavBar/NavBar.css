@@ -1,0 +1,143 @@
+ @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway:wght@100&display=swap');
+
+ .nav-bg {
+  min-width: 1500px;
+ }
+
+ Link {
+  text-decoration: none;
+ }
+
+
+.my-nav-bar {
+  display: Flex;
+  justify-content: center;
+  height: 100px;
+  background-color: rgba(40, 18, 102);
+  mix-blend-mode: multiply;
+}
+
+.nav-bg {
+  height: 80px;
+  position: relative;
+  top: 10px;
+}
+
+.navigation-logo-div {
+  width: 300px;
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+
+}
+
+.logo {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  position: relative;
+  top: 20%;
+  left: 50px;
+  font-size: 2rem; 
+  font-weight: 700;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.no-highlight {
+  text-decoration: none;
+  color: white;
+}
+ 
+.nav-items {
+  display: flex;
+  flex-direction: row;
+}
+
+.search {
+  display: flex;
+  margin: 0 auto;
+}
+
+
+
+.searching {
+  width: 365px;
+  height: 52px;
+  border: 1px;
+  border-radius: 24px;
+  padding: 10px;
+  position: relative;
+  top: 20%;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 auto;
+}
+
+.searching::placeholder {
+  color: white;
+  position: relative;
+  left: 40px;
+}
+
+.search-icon {
+  color: white;
+  position: relative;
+  height: 40px;
+  width: 40px;
+  top: 30%;
+  right: 88%;
+}
+
+.nav-list-item ul{
+  display: flex;
+  list-style-type: none;
+  gap: 40px;
+  position: relative;
+  top: 35%;
+  margin: 0 auto;
+  height: 25px;
+  align-items: center;
+}
+
+.nav-line {
+  background-color: white;
+  width: 1px;
+  height: 50px;
+}
+
+div.nav-list-item > ul{
+  height: 35px;
+}
+
+#list-item {
+  width: 100px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.5rem;
+  align-items: center;
+}
+
+.nav-dropdown {
+    display: inline-block;
+    margin-right: 5px;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    padding: 3px;
+    transform: rotate(90deg);
+    transition: transform 0.3s;
+} 
+
+.box {
+  border: 1px white solid;
+  width: 150px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  right: 50px;
+  border-radius: 12px;
+}
+
+.box-text {
+  position: relative;
+  top: 20%;
+  height: 30px;
+}
