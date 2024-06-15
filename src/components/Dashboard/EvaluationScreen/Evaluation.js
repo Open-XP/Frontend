@@ -220,7 +220,7 @@ class Evaluation extends Component {
               >
                 <ArrowLeftIcon />
               </button>
-              <div className="font-[700] text-[1.5rem]">
+              <div className="font-[700] text-[1.5rem] text-[#281266]">
                 {testInstances && testInstances.subject} Question:{" "}
                 {testInstances.year}
               </div>
