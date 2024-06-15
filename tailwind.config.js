@@ -7,6 +7,9 @@ module.exports = {
         "dash-left": "32rem",
         "dash-top": "10rem",
       },
+      fontFamily: {
+        sans: ["Open Sans", "ui-sans-serif", "system-ui"],
+      },
     },
   },
   plugins: [
