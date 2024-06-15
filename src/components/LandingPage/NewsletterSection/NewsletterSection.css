@@ -1,0 +1,119 @@
+.n-s-row {
+    height: 590px;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+}
+
+.n-s-bg {
+    width: 1500px;
+    height: 590px;
+    display: flex;
+    flex-direction: column;
+}
+
+.n-s-text-1 {
+    width: 1037px;
+    height: 176px;
+    position: relative;
+    top: 100px;
+    
+    display: flex;
+    align-items: center; /* This aligns children vertically within the .n-s-text-1 */
+    justify-content: center; /* Add this if you want to center the flex children horizontally */
+    flex-direction: column;
+    gap: 29px;
+
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto; /* Center horizontally */
+}
+
+.n-s-text-1-1 {
+    width: 572px;
+    height: 54px;
+    font-family:'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    color: rgba(40, 18, 102, 1);
+    text-align: center;
+}
+
+
+.n-s-text-1-2 {
+    width: 1037px;
+    height: 100px;
+    font-family:'Open Sans', sans-serif;
+    font-weight: 500px;
+    font-size: 32px;
+    text-align: center;
+    color: rgba(60, 60, 60, 1);
+}
+
+.n-s-text-2 {
+    width: 1143px;
+    height: 80px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    top: 150px;
+    align-self: center;
+}
+
+.n-s-text-2-1{
+    width: 813px;
+    height: 99px;
+    background-color: rgba(40, 18, 102, 1);
+    display: flex;
+    align-items: center;
+}
+
+.n-s-text-2-2, .n-s-button {
+    width: 330px;
+    height: 99px;
+    border-radius: 0px 9px 9px 0px;
+    
+}
+
+.n-s-button {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600px;
+    font-size: 32px;
+    text-align: center;
+    color: rgba(60, 60, 60, 1);
+    background-color: white;
+    position: relative;
+    left: 0;
+    border-left-width: 0;
+
+}
+
+.n-s-placeholder::placeholder {
+    color: white;
+    border: 0;
+    position: relative;
+    left: 30px;
+}
+
+.n-s-placeholder {
+    width: fit-content;
+    background-color: rgba(40, 18, 102, 1);
+    position: relative;
+    left: 92px;
+    height: 70px;
+}
+
+.n-s-placeholder {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    border: none;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+}
+
+.n-s-placeholder:focus {
+    outline: 1px solid white;
+    border-radius: 9px;
+    box-sizing: border-box; 
+}
