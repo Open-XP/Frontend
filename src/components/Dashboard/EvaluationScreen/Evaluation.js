@@ -87,16 +87,6 @@ class Evaluation extends Component {
     }
   }
 
-  // componentDidUpdate(prevProps) {
-  //   // Check if subjectQuestions has been updated
-  //   if (prevProps.subjectQuestions !== this.props.subjectQuestions) {
-  //     console.log(
-  //       "Question count updated:",
-  //       this.props.subjectQuestions.length
-  //     );
-  //   }
-  // }
-
   handleNextQuestion = () => {
     this.setState((prevState, props) => {
       const nextIndex = prevState.currentQuestionIndex + 1;
@@ -113,30 +103,31 @@ class Evaluation extends Component {
     });
   };
 
-  handleOptionChange = (option) => {
+  handleOptionChange = (option, index) => {
     const { subjectQuestions } = this.props;
     const questionId = subjectQuestions[this.state.currentQuestionIndex].id;
+    const optionLetter = ["A", "B", "C", "D", "E"][index];
 
     this.setState(
       (prevState) => ({
         selectedOptions: {
           ...prevState.selectedOptions,
-          [questionId]: option, // Store the option selected for each question
+          [questionId]: optionLetter,
         },
       }),
       () => {
-        // Optionally submit the answer after setting state
         this.props.submitAnswer(
           this.props.testInstances.id,
           questionId,
-          option
+          optionLetter
         );
       }
     );
   };
+
   handleCancelTest = () => {
     const shouldCancel = window.confirm(
-      "Are you sure you want to cancel the test? This action cannot be undone."
+      "Are you sure you want to cancel the test? Your progress would be lost."
     );
 
     if (shouldCancel) {
@@ -187,6 +178,7 @@ class Evaluation extends Component {
       currentQuestion.option_D,
       currentQuestion.option_E,
     ].filter((option) => option !== undefined && option !== "");
+
     return (
       <div className="flex flex-col gap-4 mt-4">
         <div className="font-[500] h-fit text-[2.25rem]">
@@ -194,22 +186,24 @@ class Evaluation extends Component {
         </div>
         {options.map((option, index) => (
           <div key={index} className="flex items-center gap-4">
-            <input
-              type="radio"
-              name={`option-${questionId}`}
-              className="w-[1.938rem] h-[1.938rem]"
-              checked={selectedOption === option}
-              onChange={() => this.handleOptionChange(option)}
-            />
-            <div className="font-[600] text-[2rem]">{option}</div>
+            <label className="flex items-center gap-4 cursor-pointer">
+              <input
+                type="radio"
+                name={`option-${questionId}`}
+                className="w-[1.938rem] h-[1.938rem]"
+                checked={selectedOption === ["A", "B", "C", "D", "E"][index]}
+                onChange={() => this.handleOptionChange(option, index)}
+              />
+              <div className="font-[600] text-[2rem]">{option}</div>
+            </label>
           </div>
         ))}
       </div>
     );
   };
+
   render() {
-    const { currentQuestionIndex, subjectQuestions, testInstances } =
-      this.props;
+    const { subjectQuestions, testInstances } = this.props;
     const totalQuestions = subjectQuestions.length;
     const displayIndex = this.state.currentQuestionIndex + 1;
     const { remainingTime } = this.state;
@@ -254,28 +248,24 @@ class Evaluation extends Component {
                   Previous
                 </button>
               )}
-              {/* Always render the Next or Submit button */}
               <button
                 className="bg-[#BBE6FF] w-[12.25rem] h-[4.5rem] rounded-lg font-[700] text-[1.5rem]"
                 onClick={() => {
-                  // Check if it's the last question
                   if (
                     this.state.currentQuestionIndex ===
                     this.props.subjectQuestions.length - 1
                   ) {
-                    this.handleCompleteTest(); // Call complete test on last question
+                    this.handleCompleteTest();
                   } else {
-                    this.handleNextQuestion(); // Otherwise, go to the next question
+                    this.handleNextQuestion();
                   }
                 }}
-                disabled={this.state.loading} // Disable during loading state, if any
+                disabled={this.state.loading}
               >
-                {
-                  this.state.currentQuestionIndex ===
-                  this.props.subjectQuestions.length - 1
-                    ? "Submit" // Text for the last question
-                    : "Next" // Text for other questions
-                }
+                {this.state.currentQuestionIndex ===
+                this.props.subjectQuestions.length - 1
+                  ? "Submit"
+                  : "Next"}
               </button>
             </div>
           </div>
