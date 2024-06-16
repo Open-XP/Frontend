@@ -18,8 +18,8 @@ function classNames(...classes) {
 
 const Navbar = () => {
   return (
-    <div className="flex fixed h-[6rem] w-full justify-center bg-[#281266] z-10">
-      <div className="flex w-[90rem] justify-between p-4 items-center bg-[#281266]">
+    <div className="flex fixed h-[6rem] w-full justify-center z-20  bg-[#281266]/[99%]">
+      <div className="flex w-[90rem] justify-between p-4 items-center">
         <div className="">
           <div className="flex items-center gap-2">
             <OpenxpSVG className="w-10 h-10 text-white" />
