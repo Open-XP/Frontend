@@ -1,10 +1,9 @@
 import React from "react";
-import "./DivisionalSection.css";
 
 const DivisionalSection = () => {
   return (
-    <div className="d-s-row">
-      <div className="d-s-bg"></div>
+    <div className="flex w-full  h-[24.813rem] justify-center">
+      <div className="w-[94rem] h-[24.813rem] bg-[#2D9CDB1C] -z-10"></div>
     </div>
   );
 };
