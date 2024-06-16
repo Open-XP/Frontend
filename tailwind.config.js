@@ -24,6 +24,10 @@ module.exports = {
       borderWidth: {
         1: "1px",
       },
+      colors: {
+        "purple-primary": "#281266",
+        "skyblue-secondary": "#2D9CDB",
+      },
     },
   },
   plugins: [
