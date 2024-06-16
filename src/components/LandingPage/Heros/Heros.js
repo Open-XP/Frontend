@@ -6,7 +6,7 @@ const Heros = () => {
     <div className="relative flex w-full justify-center">
       <div className="absolute w-full h-[55rem] bg-purple-primary -z-10"></div>
       <img
-        src={require("../OverLay/openxp.png")}
+        src={require("../../../icons/overlay.png")}
         alt="Background overlay"
         className="absolute w-[50%] h-[50rem] object-cover -z-10 mix-blend-multiply"
       />
