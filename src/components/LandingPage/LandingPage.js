@@ -15,7 +15,7 @@ import FooterImg from "./FooterImg/FooterImg.js";
 
 function LandingPage() {
   return (
-    <div className="App">
+    <div className="overflow-y-scroll no-scrollbar">
       <NavBar />
       <Heros />
       <OverLay />
