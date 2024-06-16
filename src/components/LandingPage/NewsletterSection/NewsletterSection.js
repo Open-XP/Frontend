@@ -3,6 +3,11 @@ import React from "react";
 const NewsletterSection = () => {
   return (
     <div className="flex w-full h-[36.875rem] justify-center z-20">
+      <img
+        src={require("../../../icons/Asset.png")}
+        alt="Newsletter Background"
+        className="absolute w-full h-[36.875rem] object-cover z-10"
+      />
       <div className="flex flex-col w-[90rem] h-[36.875rem] justify-center items-center gap-[4rem]">
         <div className="w-[64.813rem] h-[11.125rem]">
           <div className="font-[700] text-[2.5rem] leading-[3.404rem] text-center text-purple-primary font-sans">
