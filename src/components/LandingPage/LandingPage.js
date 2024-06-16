@@ -1,6 +1,5 @@
 import NavBar from "./NavBar/NavBar.js";
 import Heros from "./Heros/Heros.js";
-import OverLay from "./OverLay/Overlay.js";
 import SecondSection from "./SecondSection/SecondSection.js";
 import QuoteSection from "./QuoteSection/QuoteSection.js";
 import DivisionalSection from "./DivisionalSection/DivisionalSection.js";
@@ -16,7 +15,6 @@ function LandingPage() {
     <div className="overflow-y-scroll no-scrollbar">
       <NavBar />
       <Heros />
-      <OverLay />
       <SecondSection />
       <QuoteSection />
       <DivisionalSection />
