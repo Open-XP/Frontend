@@ -18,6 +18,12 @@ module.exports = {
         "custom-gradient":
           "linear-gradient(167.66deg, #3F2A7D 5.71%, rgba(63, 42, 125, 0.8) 71.15%)",
       },
+      borderColor: {
+        "custom-border": "#281266",
+      },
+      borderWidth: {
+        1: "1px",
+      },
     },
   },
   plugins: [
