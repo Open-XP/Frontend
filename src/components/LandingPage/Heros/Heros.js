@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Heros = () => {
   return (
     <div className="relative flex w-full justify-center">
-      <div className="absolute w-full h-[55rem] bg-[#281266] -z-10"></div>
+      <div className="absolute w-full h-[55rem] bg-purple-primary -z-10"></div>
       <img
         src={require("../OverLay/openxp.png")}
         alt="Background overlay"
