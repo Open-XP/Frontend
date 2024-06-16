@@ -220,7 +220,7 @@ class Evaluation extends Component {
               >
                 <ArrowLeftIcon />
               </button>
-              <div className="font-[700] text-[1.5rem] text-[#281266]">
+              <div className="font-[700] text-[1.5rem] text-purple-primary">
                 {testInstances && testInstances.subject} Question:{" "}
                 {testInstances.year}
               </div>
@@ -241,7 +241,7 @@ class Evaluation extends Component {
             <div className="flex justify-between pt-[3rem]">
               {this.state.currentQuestionIndex > 0 && (
                 <button
-                  className="bg-[#281266] w-[12.25rem] h-[4.5rem] rounded-lg font-[700] text-white text-[1.5rem]"
+                  className="bg-purple-primary w-[12.25rem] h-[4.5rem] rounded-lg font-[700] text-white text-[1.5rem]"
                   onClick={this.handlePreviousQuestion}
                 >
                   Previous
