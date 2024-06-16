@@ -16,7 +16,7 @@
     font-weight: bold;
     font-size: 2rem;
     position: relative;
-    z-index: 2;
+    /* z-index: 2; */
 
 }
 
@@ -57,7 +57,7 @@
 
 .hero-col-set-2 {
     width: 600px;
-    z-index: 2;
+    /* z-index: 2; */
 }
 
 .hero-right-col-container {
@@ -128,7 +128,7 @@
 }
 
 #hero-left-move {
-    z-index: 2;
+    /* z-index: 2; */
 }
 
 .second-left-text-row-text {
