@@ -45,13 +45,15 @@ const Heros = () => {
             <div className="flex flex-col w-[22.375rem] gap-[1.813rem]">
               <input
                 type="text"
+                autocomplete="email"
                 placeholder="Enter your email address"
-                className="w-[22.375rem] h-[3.375rem] border border-gray-300 rounded-[0.563rem] pl-[1.25rem] text-[0.875rem] font-sans"
+                className="w-[22.375rem] h-[3.375rem] border-none bg-[#E9F0FA] rounded-[0.563rem] pl-[1.25rem] text-[0.875rem] font-sans"
               />
               <input
                 type="password"
+                autocomplete="password"
                 placeholder="Enter your password"
-                className="w-[22.375rem] h-[3.75rem] border border-gray-300 rounded-[0.563rem] pl-[1.25rem] text-[0.875rem] font-sans"
+                className="w-[22.375rem] h-[3.75rem] border-none bg-[#E9F0FA] rounded-[0.563rem] pl-[1.25rem] text-[0.875rem] font-sans"
               />
               <button className="w-[22.375rem] h-[3.75rem] border rounded-[0.563rem] font-sans font-[700] text-[1.25rem] bg-[#2D9CDB] text-white">
                 Start Learning For Free
