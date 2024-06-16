@@ -15,10 +15,10 @@ const NewsletterSection = () => {
         </div>
         <div className="flex">
           <input
-            className="w-[50.813rem] h-[5rem] rounded-l-[3.438rem] px-[5rem] placeholder-white bg-[#281266] border-none font-sans font-[400] text-[2rem]"
+            className="w-[50.813rem] h-[5rem] rounded-l-[3.438rem] px-[5rem] placeholder-white bg-[#281266] border-none font-sans font-[400] text-[2rem] text-white"
             placeholder="johndoe@gmail.com"
           />
-          <button className="flex w-[20.625rem] h-[5rem] rounded-r-[3.438rem] font-[600] font-sans text-[2rem] leading-[2.724rem] bg-white justify-center items-center">
+          <button className="flex w-[20.625rem] h-[5rem] rounded-r-[3.438rem] font-[600] font-sans text-[2rem] leading-[2.724rem] bg-white border-1 border-custom-border justify-center items-center">
             Subscribe Now
           </button>
         </div>
