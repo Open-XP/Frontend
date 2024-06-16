@@ -35,7 +35,7 @@ export default class MockExam extends Component {
                 alt="WAEC Logo"
               />
             </div>
-            <div className="font-bold text-2xl text-[#281266] w-[15rem] text-center">
+            <div className="font-bold text-2xl text-purple-primary w-[15rem] text-center">
               West African Exam Council
             </div>
           </div>
@@ -53,7 +53,7 @@ export default class MockExam extends Component {
                 alt="JAMB Logo"
               />
             </div>
-            <div className="font-bold text-2xl text-[#281266] w-[15rem] text-center">
+            <div className="font-bold text-2xl text-purple-primary w-[15rem] text-center">
               Joint Admissions & Matriculation Board
             </div>
           </div>
@@ -71,7 +71,7 @@ export default class MockExam extends Component {
                 alt="NECO Logo"
               />
             </div>
-            <div className="font-bold text-2xl text-[#281266] w-[16rem] text-center">
+            <div className="font-bold text-2xl text-purple-primary w-[16rem] text-center">
               The National Examinations Council
             </div>
           </div>
