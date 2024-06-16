@@ -1,135 +1,104 @@
 import React from "react";
-import "./SecondSection.css";
+import { ReactComponent as WaecLogo } from "../../../svgs/waec-small.svg";
+import { ReactComponent as JambLogo } from "../../../svgs/jamb-small.svg";
+import { ReactComponent as NecoLogo } from "../../../svgs/neco-small.svg";
 
+/**
+ * Renders the second section of the landing page.
+ * This component displays information about real-time exam simulations and study resources.
+ * It also showcases the Waec Examination Question and Materials.
+ *
+ * @returns {JSX.Element} The rendered SecondSection component.
+ */
 const SecondSection = () => {
   return (
-    <div className="Second-section">
-      <div className="Second-section-bg">
-        <div className="s-s-row row">
-          <div className="col s-s-col-1">
-            <div className="s-s-1">
-              <div className="s-s-text-1">
-                <div className="s-s-screen-icon">
-                  <img
-                    id="s-s-cleanup"
-                    src={require("../../../icons/screen.png")}
-                  />
-                </div>
-                <p className="s-s-font-control-3">
-                  Real time Exam Simulation and Resources.
-                </p>
+    <div className="flex w-full justify-center">
+      <div className="flex flex-row w-[90rem] h-[64.313rem] mt-[5rem] gap-[3rem]">
+        <div className="w-[47%] h-[33.938rem] ">
+          <div className="flex flex-col gap-[1.938rem]">
+            <div className="flex w-[23.625rem] gap-[0.75rem] items-center">
+              <img
+                className="w-[1.25rem] h-[1.25rem]"
+                src={require("../../../icons/screen.png")}
+                alt="Screen icon"
+              />
+              <div className="font-[700] text-[#2D9CDB] font-sans text-[1rem] leading-[1.362rem]">
+                Real Time Exam Simulations and resources.
               </div>
-              <div className="s-s-text-2">
-                <p className="s-s-font-control-2">
-                  Practice Popular Examination Questions Guranteed to Aid you
-                  Ace your Forthcoming Exams.
-                </p>
+            </div>
+            <div className="font-[700] text-[1.75rem] leading-[2.383rem] font-sans">
+              Practice Popular Exam Questions <br /> Guaranteed to aid you ace{" "}
+              <br />
+              your forthcoming Exams.
+            </div>
+            <div className="flex flex-col gap-[0.625rem]">
+              <div className="flex items-center gap-[0.625rem]">
+                <img
+                  className="w-[1.01rem] h-[1.01rem]"
+                  src={require("../../../icons/shield-check.png")}
+                  alt="shild icon"
+                />
+                <div className="font-[500] text-[1.25rem] leading-[1.703rem]">
+                  Your One-Stop Solution to Exam Worries.
+                </div>
               </div>
-              <div className="s-s-text-3-list">
-                <div id="s-s-cleanup">
-                  <div className="s-s-checked-shield">
-                    <img
-                      id="s-s-icon"
-                      src={require("../../../icons/shield-check.png")}
-                    />
-                  </div>
-                  <p id="s-s-font-control">
-                    Your one Stop Solution to Exam Axiety
-                  </p>
+              <div className="flex items-center gap-[0.625rem]">
+                <img
+                  className="w-[1.01rem] h-[1.01rem]"
+                  src={require("../../../icons/shield-check.png")}
+                  alt="shild icon"
+                />
+                <div className="font-[500] text-[1.25rem] leading-[1.703rem]">
+                  Access a comprehensive library of study resources.
                 </div>
-                <div id="s-s-cleanup">
-                  <div className="s-s-checked-shield">
-                    <img
-                      id="s-s-icon"
-                      src={require("../../../icons/shield-check.png")}
-                    />
-                  </div>
-                  <p id="s-s-font-control">
-                    Your one Stop Solution to Exam Axiety
-                  </p>
+              </div>
+              <div className="flex items-center gap-[0.625rem]">
+                <img
+                  className="w-[1.01rem] h-[1.01rem]"
+                  src={require("../../../icons/shield-check.png")}
+                  alt="shild icon"
+                />
+                <div className="font-[500] text-[1.25rem] leading-[1.703rem]">
+                  Experience real-time exam simulations.
                 </div>
-                <div id="s-s-cleanup">
-                  <div className="s-s-checked-shield">
-                    <img
-                      id="s-s-icon"
-                      src={require("../../../icons/shield-check.png")}
-                    />
-                  </div>
-                  <p id="s-s-font-control">
-                    Your one Stop Solution to Exam Axiety
-                  </p>
-                </div>
-                <div id="s-s-cleanup">
-                  <div className="s-s-checked-shield">
-                    <img
-                      id="s-s-icon"
-                      src={require("../../../icons/shield-check.png")}
-                    />
-                  </div>
-                  <p id="s-s-font-control">
-                    Your one Stop Solution to Exam Axiety
-                  </p>
-                </div>
-                <div id="s-s-cleanup">
-                  <div className="s-s-checked-shield">
-                    <img
-                      id="s-s-icon"
-                      src={require("../../../icons/shield-check.png")}
-                    />
-                  </div>
-                  <p id="s-s-font-control">
-                    Your one Stop Solution to Exam Axiety
-                  </p>
-                </div>
-                <div className="s-s-button-container">
-                  <button className="s-s-button-1">
-                    <p>Exam Library</p>
-                  </button>
+              </div>
+              <div className="flex items-center gap-[0.625rem]">
+                <img
+                  className="w-[1.01rem] h-[1.01rem]"
+                  src={require("../../../icons/shield-check.png")}
+                  alt="shild icon"
+                />
+                <div className="font-[500] text-[1.25rem] leading-[1.703rem]">
+                  Boost your confidence with guaranteed practice questions.
                 </div>
               </div>
             </div>
           </div>
-          <div className="col">
-            <div className="s-s-2">
-              <div className="s-s-container-bg">
-                <div id="s-s-container">
-                  <img src={require("../../../icons/TOEFL.png")} />
-                  <p id="s-s-paragraph">
-                    TOEFL Examination Qustions and Resources
-                  </p>
-                </div>
+        </div>
+        <div className="flex w-[53%] h-[33.938rem] ">
+          <div className="w-[38.25rem] h-[33.938rem] shadow-custom2">
+            <div className="flex h-[8.438rem] w-[38.813rem] items-center justify-center gap-[0.938rem] shadow-custom">
+              <WaecLogo className="w-[3.938rem] h-[3.938rem]" />
+              <div className="font-[500] text-[1.25rem] leading-[1.703rem] font-sans box-s">
+                WAEC Examination Question and Materials
               </div>
-              <div className="s-s-container-bg">
-                <div id="s-s-container">
-                  <img src={require("../../../icons/TOEFL.png")} />
-                  <p id="s-s-paragraph">
-                    TOEFL Examination Questions and Resources
-                  </p>
-                </div>
+            </div>
+            <div className="flex h-[8.438rem] w-[38.813rem] items-center justify-center gap-[0.938rem] shadow-custom">
+              <JambLogo className="w-[3.938rem] h-[3.938rem]" />
+              <div className="font-[500] text-[1.25rem] leading-[1.703rem] font-sans">
+                JAMB Examination Question and Materials
               </div>
-              <div className="s-s-container-bg">
-                <div id="s-s-container">
-                  <img src={require("../../../icons/TOEFL.png")} />
-                  <p id="s-s-paragraph">
-                    TOEFL Examination Questions and Resources
-                  </p>
-                </div>
+            </div>
+            <div className="flex h-[8.438rem] w-[38.813rem] items-center justify-center gap-[0.938rem] shadow-custom">
+              <NecoLogo className="w-[3.938rem] h-[3.938rem]" />
+              <div className="font-[500] text-[1.25rem] leading-[1.703rem] font-sans">
+                NECO Examination Question and Materials
               </div>
-              <div className="s-s-container-bg">
-                <div id="s-s-container">
-                  <img src={require("../../../icons/TOEFL.png")} />
-                  <p id="s-s-paragraph">
-                    TOEFL Examination Questions and Resources
-                  </p>
-                </div>
-              </div>
-              <div className="s-s-container-bg">
-                <div id="s-s-container">
-                  <img src={require("../../../icons/TOEFL.png")} />
-                  <p id="s-s-paragraph">
-                    TOEFL Examination Questions and Resources
-                  </p>
-                </div>
+            </div>
+            <div className="flex h-[8.438rem] w-[38.813rem] items-center justify-center gap-[0.938rem] shadow-custom">
+              <NecoLogo className="w-[3.938rem] h-[3.938rem]" />
+              <div className="font-[500] text-[1.25rem] leading-[1.703rem] font-sans">
+                NCEE Examination Question and Materials
               </div>
             </div>
           </div>
