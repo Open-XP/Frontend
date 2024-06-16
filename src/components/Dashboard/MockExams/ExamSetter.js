@@ -164,7 +164,7 @@ class ExamSetter extends Component {
               carefully.
             </div>
           )}
-          <Link className="flex items-center justify-center w-[80%] h-[4.813rem] text-center text-[2rem] font-[600] text-white bg-[#281266] no-underline">
+          <Link className="flex items-center justify-center w-[80%] h-[4.813rem] text-center text-[2rem] font-[600] text-white bg-purple-primary no-underline">
             <button onClick={this.handleStartTest}>Start Test</button>
           </Link>
         </div>
