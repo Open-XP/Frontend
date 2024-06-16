@@ -18,12 +18,12 @@ function classNames(...classes) {
 
 const Navbar = () => {
   return (
-    <div className="flex fixed w-full justify-center bg-[#281266] mix-blend-multiply z-10">
-      <div className="flex w-[90rem] justify-between bg-[#281266] p-4 items-center">
+    <div className="flex fixed h-[6rem] w-full justify-center bg-[#281266] z-10">
+      <div className="flex w-[90rem] justify-between p-4 items-center bg-[#281266]">
         <div className="">
           <div className="flex items-center gap-2">
-            <OpenxpSVG className="w-16 h-16 text-white" />
-            <div className="text-3xl py-4 text-white font-[700] font-sans">
+            <OpenxpSVG className="w-10 h-10 text-white" />
+            <div className="text-3xl py-4 text-white font-[700] font-sans z-10">
               openxp
             </div>
           </div>
@@ -36,11 +36,11 @@ const Navbar = () => {
             placeholder="what do you want to learn?"
           />
         </div>
-        <div className="flex w-[35rem] justify-center">
+        <div className="flex w-[40rem] justify-center">
           <div className="flex flex-row w-full gap-3 justify-around items-center px-3">
             <div className="">
               <Menu>
-                <MenuButton className="flex no-underline text-white font-[400] text-[1rem] leading-[1.4rem] gap-2">
+                <MenuButton className="flex no-underline text-white font-[400] text-[1.3rem] leading-[1.4rem] gap-2">
                   Courses
                   <ChevronDownIcon
                     className="-mr-1 h-5 w-5 text-gray-400"
@@ -140,7 +140,7 @@ const Navbar = () => {
             </div>
             <div>
               <Menu>
-                <MenuButton className="flex no-underline text-white font-[400] text-[1rem] leading-[1.4rem] gap-2">
+                <MenuButton className="flex no-underline text-white font-[400] text-[1.3rem] leading-[1.4rem] gap-2">
                   Resources
                   <ChevronDownIcon
                     className="-mr-1 h-5 w-5 text-gray-400"
@@ -240,7 +240,7 @@ const Navbar = () => {
             </div>
             <div>
               <Menu>
-                <MenuButton className="flex no-underline text-white font-[400] text-[1rem] leading-[1.4rem] gap-2">
+                <MenuButton className="flex no-underline text-white font-[400] text-[1.3rem] leading-[1.4rem] gap-2">
                   About us
                   <ChevronDownIcon
                     className="-mr-1 h-5 w-5 text-gray-400"
@@ -338,16 +338,19 @@ const Navbar = () => {
                 </Transition>
               </Menu>
             </div>
-            <div className="h-14 w-[1px] bg-white font-[400] text-[1rem] leading-[1.4rem]"></div>
-            <div id="no-underline text-white font-[400] text-[1rem] leading-[1.4rem]">
-              <Link to="/dashboard" className="no-underline text-white">
+            <div className="h-14 w-[1px] bg-white font-[400]"></div>
+            <div id="no-underline text-white font-[400] ">
+              <Link
+                to="/dashboard"
+                className="no-underline text-[1.3rem] leading-[1.4rem] text-white"
+              >
                 LogIn
               </Link>
             </div>
             <div className="flex justify-center items-center w-[8rem] h-[3rem] rounded-lg border border-white">
               <Link
                 to="/signup"
-                className="no-underline text-white items-center"
+                className="no-underline text-white text-[1.5rem] items-center"
               >
                 Start Free
               </Link>
