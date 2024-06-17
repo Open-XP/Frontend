@@ -2,10 +2,17 @@ import React from "react";
 import { ReactComponent as Students } from "../../../svgs/study-group-african-people.svg";
 import { ArrowLongRightIcon } from "@heroicons/react/24/solid";
 
+/**
+ * Renders the CommunitySection component.
+ * This component displays information about a global exam preparation community.
+ * It includes a description, an image, and practical tools for exam success.
+ *
+ * @returns {JSX.Element} The rendered CommunitySection component.
+ */
 const CommunitySection = () => {
   return (
-    <div className="flex w-full h-[42.75rem] justify-center ">
-      <div className="flex flex-row w-[90rem] h-[42.75rem] items-center">
+    <div className="flex w-full h-[80rem] 2xl:h-[42.75rem] justify-center ">
+      <div className="flex flex-col 2xl:flex-row w-[90rem] h-full  justify-center 2xl:h-[42.75rem] items-center gap-[3rem]  2xl:gap-0">
         <div className="flex flex-col w-1/2 h-[33.25rem] items-center gap-5 justify-center">
           <div className="font-[700] text-[1.75rem] leading-[2.383rem] w-[35.125rem] h-[4.75rem]">
             Beyond Exam Preparations: A Gateway to Guaranteed Exam Success{" "}
