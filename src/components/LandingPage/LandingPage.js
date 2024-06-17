@@ -8,7 +8,6 @@ import CommunitySection from "./CommunitySection/CommunitySection.js";
 import TestimonialSection from "./TestimonialSection/TestimonialSection.js";
 import NewsletterSection from "./NewsletterSection/NewsletterSection.js";
 import Footer from "./Footer/Footer.js";
-import FooterImg from "./FooterImg/FooterImg.js";
 
 function LandingPage() {
   return (
@@ -22,7 +21,6 @@ function LandingPage() {
       <CommunitySection />
       <TestimonialSection />
       <NewsletterSection />
-      <FooterImg />
       <Footer />
     </div>
   );
