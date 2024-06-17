@@ -150,7 +150,7 @@ export class LogInPage extends Component {
                   </div>
                   <button
                     onSubmit={this.onSubmit}
-                    className="w-[9.438rem] h-[3.438rem] font-sans font-[700] text-[1.438rem] leading-[2.043rem] bg-[#D9D9D952] bg-opacity-32"
+                    className="w-[9.438rem] h-[3.438rem] font-sans font-[700] text-[1.438rem] leading-[2.043rem] bg-[#D9D9D952] bg-opacity-32 rounded-xl"
                   >
                     Login
                   </button>
