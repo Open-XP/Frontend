@@ -4,117 +4,124 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="footer-row">
-      <div className="footer-col">
-        <div id="foot-individual-container" className="footer-openxp">
-          <div className="footer-head">
-            <p>OpenXP</p>
+    <div className="flex w-full h-[37.875rem] justify-center">
+      <div className="absolute w-full h-[37.875rem] bg-purple-primary mix-blend-multiply -z-10"></div>
+      <img
+        src={require("../../../icons/footeroverlay.png")}
+        alt="logo"
+        className="absolute h-[37.875rem] w-[90rem] object-cover -z-20 mix-blend-multiply"
+      />
+      <div className="flex mt-[8rem] gap-[5rem] text-white font-sans">
+        <div className="flex flex-col gap-3">
+          <div className="w-107.625rem] h-[2.063rem] font-[700] text-[1.5rem]  text-white">
+            Openpx
           </div>
-          <ul className="footer-text-align f-icon-align">
-            <li>
-              <div>
-                <img
-                  className="footer-icon-control"
-                  src={require("../../../icons/instagram-logo-f.png")}
-                />
-              </div>
-            </li>
-            <li>
-              <div className="footer-icon-control">
-                <img
-                  className="footer-icon-control"
-                  src={require("../../../icons/facebook-f.png")}
-                />
-              </div>
-            </li>
-            <li>
-              <div className="footer-icon-control">
-                <img
-                  className="footer-icon-control"
-                  src={require("../../../icons/twitter-f.png")}
-                />
-              </div>
-            </li>
-          </ul>
+          <div className="flex gap-[1rem]">
+            <img
+              src={require("../../../icons/instagram-logo-f.png")}
+              alt="Instagram logo"
+              className="w-[1.563rem] h-[1.563rem]"
+            />
+            <img
+              src={require("../../../icons/facebook-f.png")}
+              alt="Facebook logo"
+              className="w-[1.563rem] h-[1.563rem]"
+            />
+            <img
+              src={require("../../../icons/twitter-f.png")}
+              alt="Twitter logo"
+              className="w-[1.563rem] h-[1.563rem]"
+            />
+          </div>
         </div>
-        <div id="foot-individual-container">
-          <div className="footer-head">
-            <p>About</p>
+        <div className="flex flex-col gap-3">
+          <div className="w-107.625rem] h-[2.063rem] font-[700] text-[1.5rem] ">
+            About
           </div>
-          <ul className="footer-text-align">
-            <li>
-              <Link>News</Link>
-            </li>
-            <li>
-              <Link>Impact</Link>
-            </li>
-            <li>
-              <Link>Community</Link>
-            </li>
-          </ul>
+          <div className="flex flex-col">
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              News
+            </Link>
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              Impact
+            </Link>
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              Community
+            </Link>
+          </div>
         </div>
-        <div id="foot-individual-container">
-          <div className="footer-head">
-            <p>Contact Us</p>
+        <div className="flex flex-col gap-3">
+          <div className="w-107.625rem] h-[2.063rem] font-[700] text-[1.5rem] ">
+            Contact Us
           </div>
-          <ul className="footer-text-align">
-            <li>
-              <Link>News</Link>
-            </li>
-            <li>
-              <Link>Impact</Link>
-            </li>
-            <li>
-              <Link>Community</Link>
-            </li>
-          </ul>
+          <div className="flex flex-col">
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              Mail
+            </Link>
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              Phone
+            </Link>
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              Whatsapp
+            </Link>
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              Slack
+            </Link>
+          </div>
         </div>
-        <div id="foot-individual-container">
-          <div className="footer-head">
-            <p>Exam Library</p>
+        <div className="flex flex-col gap-3">
+          <div className="w-107.625rem] h-[2.063rem] font-[700] text-[1.5rem] ">
+            Exam Library
           </div>
-          <ul className="footer-text-align">
-            <li>
-              <Link>TOFEL</Link>
-            </li>
-            <li>
-              <Link>Jamb</Link>
-            </li>
-            <li>
-              <Link>WAEC</Link>
-            </li>
-            <li>
-              <Link>NECO</Link>
-            </li>
-            <li>
-              <Link>NABTEB</Link>
-            </li>
-            <li>
-              <Link>IGCSE</Link>
-            </li>
-            <li>
-              <Link>ICAN</Link>
-            </li>
-            <li>
-              <Link>SAT</Link>
-            </li>
-          </ul>
+          <div className="flex flex-col">
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              WAEC
+            </Link>
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              JAMB
+            </Link>
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              NECO
+            </Link>
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              NCEE
+            </Link>
+          </div>
         </div>
-        <div id="foot-individual-container">
-          <div className="footer-head">
-            <p>Community</p>
+        <div className="flex flex-col gap-3">
+          <div className="w-107.625rem] h-[2.063rem] font-[700] text-[1.5rem] ">
+            Exam Library
           </div>
-          <ul className="footer-text-align">
-            <li>
-              <Link>Whatsapp</Link>
-            </li>
-            <li>
-              <Link>Disord</Link>
-            </li>
-            <li>
-              <Link>Slack</Link>
-            </li>
-          </ul>
+          <div className="flex flex-col">
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              WAEC
+            </Link>
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              JAMB
+            </Link>
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              NECO
+            </Link>
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              NCEE
+            </Link>
+          </div>
+        </div>
+        <div className="flex flex-col gap-3">
+          <div className="w-107.625rem] h-[2.063rem] font-[700] text-[1.5rem] ">
+            Community
+          </div>
+          <div className="flex flex-col">
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              Whatsapp
+            </Link>
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              Discord
+            </Link>
+            <Link className="font-[400] text-[1.25rem] leading-[1.703rem]">
+              Slack
+            </Link>
+          </div>
         </div>
       </div>
     </div>
