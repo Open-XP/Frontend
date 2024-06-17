@@ -1,5 +1,12 @@
 import React from "react";
 
+/**
+ * Renders the NewsletterSection component.
+ * This component displays a newsletter subscription section with a background image, title, description, and input field.
+ * Users can enter their email address and subscribe to the newsletter.
+ *
+ * @returns {JSX.Element} The rendered NewsletterSection component.
+ */
 const NewsletterSection = () => {
   return (
     <div className="flex w-full h-[36.875rem] justify-center z-20">
