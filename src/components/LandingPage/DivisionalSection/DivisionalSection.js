@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * Renders the DivisionalSection component.
+ * @returns {JSX.Element} The rendered DivisionalSection component.
+ */
 const DivisionalSection = () => {
   return (
     <div className="flex w-full  h-[24.813rem] justify-center">
