@@ -6,7 +6,7 @@ const CourseCard = () => {
       <img
         src={require("../../../icons/pexels-pixabay.png")}
         alt="Newsletter Background"
-        className="absolute w-full h-[58.313rem]] object-cover -z-10"
+        className="absolute w-full h-[58.313rem] object-cover -z-10"
       />
       <div className="font-[700] text-[2.25rem] leading-[3.064rem] text-center text-white w-[63.125rem] h-[6.125rem]">
         Gear Towards Getting Your desired Result for <br /> Scholarship Exams
