@@ -1,7 +1,12 @@
 import React from "react";
-import "./Footer.css";
 import { Link } from "react-router-dom";
 
+/**
+ * Footer component.
+ * Renders the footer section of the landing page.
+ *
+ * @returns {JSX.Element} The rendered JSX element.
+ */
 const Footer = () => {
   return (
     <div className="flex w-full h-[37.875rem] justify-center">
