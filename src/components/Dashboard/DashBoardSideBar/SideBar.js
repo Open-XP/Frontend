@@ -38,10 +38,6 @@ class SideBar extends Component {
 
   handleLogout = () => {
     this.props.logout();
-    if (this.props.logout) {
-      console.log("Logout success");
-    }
-    this.props.navigate("/login");
   };
 
   handleToggle = (index, title) => {
