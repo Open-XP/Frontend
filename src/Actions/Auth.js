@@ -85,7 +85,7 @@ export const registers =
     });
 
     axios
-      .post("/api/auth/user/register", body, config)
+      .post("/api/auth/user/register/", body, config)
       .then((res) => {
         dispatch({
           type: REGISTER_SUCCESS,
