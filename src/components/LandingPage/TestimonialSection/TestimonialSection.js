@@ -2,7 +2,7 @@ import React from "react";
 
 const TestimonialSection = () => {
   return (
-    <div className="flex w-full h-[90rem] 2xlh-[59.75rem] justify-center items-center">
+    <div className="flex w-full h-[90rem] 2xl:h-[59.75rem] justify-center items-center">
       <div className="flex flex-col w-[90rem] h-full 2xl:h-[56.875rem] justify-center items-center gap-[4rem]">
         <div className="flex flex-col w-[62.875rem] h-[10rem] items-center justify-between">
           <div className="font-[700] text-[2.5rem] leading-[3.413rem] font-sans">
