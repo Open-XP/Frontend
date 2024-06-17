@@ -16,9 +16,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+/**
+ * Renders the navigation bar component.
+ * @returns {JSX.Element} The JSX element representing the navigation bar.
+ */
 const Navbar = () => {
   return (
-    <div className="flex fixed h-[6rem] w-full justify-center z-20 bg-purple-primary/[99%]">
+    <div className="flex fixed h-[6rem] w-full justify-center z-20 bg-purple-primary">
       <div className="flex w-[90rem] justify-between p-4 items-center">
         <div className="">
           <div className="flex items-center gap-2">
