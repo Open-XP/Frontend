@@ -10,7 +10,9 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  LOGOUT_FAILED,
 } from "./Types";
+import { type } from "@testing-library/user-event/dist/type";
 
 // CHECK TOKEN & LOAD USER
 export const loadUser = () => (dispatch, getState) => {
@@ -100,16 +102,15 @@ export const registers =
 
 // LOGOUT USER
 export const logout = () => (dispatch, getState) => {
+  console.log("SUCCESSFUL LOGOUT");
   axios
-    .get("/api/auth/user/logout", tokenConfig(getState))
+    .get("api/auth/user/logout/", tokenConfig(getState))
     .then((res) => {
-      dispatch({ type: "CLEAR_LEADS" });
-      dispatch({
-        type: LOGOUT_SUCCESS,
-      });
+      dispatch({ type: LOGOUT_SUCCESS });
     })
     .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({ type: LOGOUT_FAILED });
     });
 };
 
