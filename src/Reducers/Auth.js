@@ -50,6 +50,14 @@ export default function (state = initialState, action) {
       };
     case LOGIN_FAIL:
     case LOGOUT_SUCCESS:
+      localStorage.clear("token");
+      return {
+        ...state,
+        token: null,
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+      };
     case REGISTER_FAIL:
       localStorage.removeItem("token");
       return {
