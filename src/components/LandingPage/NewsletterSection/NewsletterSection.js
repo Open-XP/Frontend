@@ -6,7 +6,7 @@ const NewsletterSection = () => {
       <img
         src={require("../../../icons/Asset.png")}
         alt="Newsletter Background"
-        className="absolute w-full h-[36.875rem] object-cover z-10"
+        className="absolute w-[64.813rem] h-[36.875rem] -z-10"
       />
       <div className="flex flex-col w-[90rem] h-[36.875rem] justify-center items-center gap-[4rem]">
         <div className="w-[64.813rem] h-[11.125rem]">
