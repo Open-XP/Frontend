@@ -102,15 +102,18 @@ export const registers =
 
 // LOGOUT USER
 export const logout = () => (dispatch, getState) => {
-  console.log("SUCCESSFUL LOGOUT");
   axios
-    .get("api/auth/user/logout/", tokenConfig(getState))
+    .get("/api/auth/user/logout/", tokenConfig(getState))
     .then((res) => {
       dispatch({ type: LOGOUT_SUCCESS });
     })
     .catch((err) => {
-      dispatch(returnErrors(err.response.data, err.response.status));
-      dispatch({ type: LOGOUT_FAILED });
+      if (err.response && err.response.status === 403) {
+        dispatch({ type: LOGOUT_SUCCESS });
+      } else {
+        dispatch(returnErrors(err.response.data, err.response.status));
+        dispatch({ type: LOGOUT_FAILED });
+      }
     });
 };
 
