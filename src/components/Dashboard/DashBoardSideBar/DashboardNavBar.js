@@ -1,8 +1,15 @@
 import React from "react";
 import { BellIcon, MoonIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import OpenxpSVG from "../../../svgs/openxp.js";
+import { createAvatar } from "@dicebear/core";
+import { adventurer } from "@dicebear/collection";
 
 export function DashboardNavBar() {
+  const avatar = createAvatar(adventurer, {
+    seed: "custom-seed", // Custom seed
+    dataUri: true,
+  });
+  const svg = avatar.jpeg();
   return (
     <div className="flex fixed w-full py-4 px-4 justify-between items-center shadow-xl shadow-blue-gray-900/5 font-semibold bg-white">
       <div className="flex ml-10 gap-2">
