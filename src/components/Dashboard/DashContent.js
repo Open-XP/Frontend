@@ -43,7 +43,7 @@ export function DashContent() {
           }
         />
         <Route path="/mock-exam/evaluation/:id" element={<Evaluation />} />
-        <Route path="/summary" element={<SummaryPage/>} />
+        <Route path="/summary" element={<SummaryPage />} />
       </Routes>
     </div>
   );
