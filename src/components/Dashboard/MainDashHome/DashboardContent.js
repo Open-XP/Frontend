@@ -2,6 +2,7 @@ import React from "react";
 import DashboardBarChart from "./Bargraph/Bar";
 import AreaOfImprovement from "./AreaOfImprovement/AreaOfImprovement";
 import DashoardHome from "./DashboardHome/DashboardHome";
+import Void from "../DashBoardSideBar/void";
 
 export function DashoardContent() {
   return (
