@@ -106,6 +106,7 @@ export const fetchIndividualSubjectQuestion =
       }); // Added closing parenthesis here
   };
 
+  // Action to select answer
 export const submitAnswer =
   (test_instance_id, question_id, selected_option) => (dispatch, getState) => {
     const body = JSON.stringify({
@@ -182,7 +183,7 @@ export const fetchAllTestInstances = () => (dispatch, getState) => {
 // Action to get user score
 export const fetchUserScore = (test_instance_id) => (dispatch, getState) => {
   axios
-    .get(`/api/exams/user-score/${test_instance_id}/`, tokenConfig(getState))
+    .get(`/api/quiz/exams/user-score/${test_instance_id}/`, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: FETCH_USER_SCORE_SUCCESS,
