@@ -113,22 +113,7 @@ export default function (state = initialState, action) {
     case FETCH_USER_SCORE_SUCCESS:
       return {
         ...state,
-        userScores: {
-          ...state.userScores,
-          [action.payload.test_instance_id]: action.payload,
-        },
-        loading: false,
-      };
-    case FETCH_TEST_RESULTS_SUCCESS:
-      return {
-        ...state,
-        userScores: {
-          ...state.userScores,
-          totalQuestions: action.payload.total_questions,
-          score: action.payload.score,
-          correctQuestions: action.payload.correct_questions,
-          incorrectQuestions: action.payload.incorrect_questions,
-        },
+        userScores: action.payload,
         loading: false,
       };
     case FETCH_TOTAL_STUDY_TIME_SUCCESS:
