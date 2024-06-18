@@ -20,9 +20,12 @@ class SummaryPage extends Component {
   };
 
   componentDidMount() {
-    const { fetchUserScore, testInstances, userScores } = this.props;
-    if (this.props.testInstances) {
-      fetchUserScore(testInstances.id);
+    const { fetchUserScore, testInstances } = this.props;
+    if (testInstances) {
+      fetchUserScore(testInstances.id).finally(() => {
+        this.setState({ loading: false });
+      });
+    } else {
       this.setState({ loading: false });
     }
   }
@@ -79,7 +82,7 @@ class SummaryPage extends Component {
             <div className="flex w-[19.75rem] h-[19.75rem] rounded-[50%] justify-center items-center border-white border-[9px]">
               <div>
                 <div className="font-[700] text-[6rem] text-center leading-[8.171rem]">
-                  {userScores.correct_questions?.length}
+                  {userScores.score}
                 </div>
                 <div className="font-[600] text-[2.5rem] leading-[3.404rem]">
                   OF {userScores.total_questions}
