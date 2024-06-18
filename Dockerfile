@@ -7,14 +7,18 @@ WORKDIR /Frontend
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies, including 'serve' for serving the application
+RUN npm install && npm install -g serve
 
 # Bundle app source
 COPY . .
 
-# Expose port 3000
+# Build your application
+RUN npm run build --production
+
+# Expose the port that serve will run on
 EXPOSE 3000
 
-# Define the command to run your app
-CMD ["npm", "start"]
+# Serve the build directory with serve
+
+CMD ["serve", "-s", "build"]
