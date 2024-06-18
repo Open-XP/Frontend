@@ -22,7 +22,7 @@ class SummaryPage extends Component {
   componentDidMount() {
     const { fetchUserScore, testInstances, userScores } = this.props;
     if (this.props.testInstances) {
-      fetchUserScore(testInstances.id && userScores);
+      fetchUserScore(testInstances.id);
       this.setState({ loading: false });
     }
   }
