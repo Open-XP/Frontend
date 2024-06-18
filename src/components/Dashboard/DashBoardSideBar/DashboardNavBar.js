@@ -11,7 +11,7 @@ export function DashboardNavBar() {
   });
   const svg = avatar.jpeg();
   return (
-    <div className="flex fixed w-full py-4 px-4 justify-between items-center shadow-xl shadow-blue-gray-900/5 font-semibold bg-white">
+    <div className="flex fixed w-full py-4 px-4 justify-between items-center shadow-xl shadow-blue-gray-900/5 font-semibold bg-white z-20">
       <div className="flex ml-10 gap-2">
         <OpenxpSVG className="w-16 h-16 m-auto" />
         <div className=" text-3xl py-4">openxp</div>
