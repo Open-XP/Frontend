@@ -1,6 +1,5 @@
 import axios from "axios";
 import { returnErrors } from "./Messages";
-
 import {
   USER_LOADED,
   USER_LOADING,
@@ -12,15 +11,15 @@ import {
   REGISTER_FAIL,
   LOGOUT_FAILED,
 } from "./Types";
-import { type } from "@testing-library/user-event/dist/type";
+
+const baseurl = "https://kaput-cannon-obedient-walk-production.pipeops.app";
 
 // CHECK TOKEN & LOAD USER
 export const loadUser = () => (dispatch, getState) => {
-  // User Loading
   dispatch({ type: USER_LOADING });
 
   axios
-    .get("/api/auth/user/me", tokenConfig(getState))
+    .get(`${baseurl}/api/auth/user/me/`, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: USER_LOADED,
@@ -37,18 +36,16 @@ export const loadUser = () => (dispatch, getState) => {
 
 // LOGIN USER
 export const login = (email, password) => (dispatch) => {
-  // Headers
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
 
-  // Request Body
   const body = JSON.stringify({ email, password });
 
   axios
-    .post("/api/auth/user/login/", body, config)
+    .post(`${baseurl}/api/auth/user/login/`, body, config)
     .then((res) => {
       dispatch({
         type: LOGIN_SUCCESS,
@@ -67,14 +64,12 @@ export const login = (email, password) => (dispatch) => {
 export const registers =
   (first_name, last_name, username, email, password, confirm_password) =>
   (dispatch) => {
-    // Headers
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
 
-    // Request Body
     const body = JSON.stringify({
       first_name,
       last_name,
@@ -85,7 +80,7 @@ export const registers =
     });
 
     axios
-      .post("/api/auth/user/register/", body, config)
+      .post(`${baseurl}/api/auth/user/register/`, body, config)
       .then((res) => {
         dispatch({
           type: REGISTER_SUCCESS,
@@ -103,7 +98,7 @@ export const registers =
 // LOGOUT USER
 export const logout = () => (dispatch, getState) => {
   axios
-    .get("/api/auth/user/logout/", tokenConfig(getState))
+    .get(`${baseurl}/api/auth/user/logout/`, tokenConfig(getState))
     .then((res) => {
       dispatch({ type: LOGOUT_SUCCESS });
     })
@@ -119,17 +114,14 @@ export const logout = () => (dispatch, getState) => {
 
 // Setup config with token - helper function
 export const tokenConfig = (getState) => {
-  // Get token from state
   const token = getState().auth.token;
 
-  // Headers
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
 
-  // If token, add to headers config
   if (token) {
     config.headers["Authorization"] = `Token ${token}`;
   }
