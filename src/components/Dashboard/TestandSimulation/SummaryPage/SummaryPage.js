@@ -79,7 +79,7 @@ class SummaryPage extends Component {
             <div className="flex w-[19.75rem] h-[19.75rem] rounded-[50%] justify-center items-center border-white border-[9px]">
               <div>
                 <div className="font-[700] text-[6rem] text-center leading-[8.171rem]">
-                  {userScores.score}
+                  {userScores.correct_questions?.length}
                 </div>
                 <div className="font-[600] text-[2.5rem] leading-[3.404rem]">
                   OF {userScores.total_questions}
