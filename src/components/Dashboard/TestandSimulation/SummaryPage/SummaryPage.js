@@ -16,11 +16,15 @@ class SummaryPage extends Component {
 
   state = {
     visibility: [],
+    loading: true,
   };
 
   componentDidMount() {
-    const { fetchUserScore } = this.props;
-    fetchUserScore("a7f4aa60-82b1-4803-b8c0-b9f7140ef252");
+    const { fetchUserScore, testInstances, userScores } = this.props;
+    if (this.props.testInstances) {
+      fetchUserScore(testInstances.id);
+      this.setState({ loading: false });
+    }
   }
 
   toggleVisibility = (index) => {
@@ -50,9 +54,11 @@ class SummaryPage extends Component {
   };
 
   render() {
+    if (this.state.loading) {
+      return <div>Loading...</div>;
+    }
     const { userScores } = this.props;
 
-    // Prepare sections from incorrect questions
     const sections =
       userScores.incorrect_questions?.map((item, index) => {
         const correctOptionKey = `option_${item.answer}`;
@@ -63,7 +69,7 @@ class SummaryPage extends Component {
       }) || [];
 
     return (
-      <div className="flex w-screen h-screen">
+      <div className="flex w-screen h-screen ">
         <div className="fixed flex flex-col w-[35%] bg-purple-primary h-full text-white justify-center items-center gap-5">
           <div className="flex flex-col w-[20.375rem] h-[26.563rem] items-center justify-between">
             <div className="font-[700] text-[2.5rem] leading-[8.171rem] font-sans">
@@ -72,7 +78,7 @@ class SummaryPage extends Component {
             <div className="flex w-[19.75rem] h-[19.75rem] rounded-[50%] justify-center items-center border-white border-[9px]">
               <div>
                 <div className="font-[700] text-[6rem] text-center leading-[8.171rem]">
-                  {userScores.score}
+                  {userScores.correct_questions.length}
                 </div>
                 <div className="font-[600] text-[2.5rem] leading-[3.404rem]">
                   OF {userScores.total_questions}
@@ -120,7 +126,7 @@ class SummaryPage extends Component {
                 </div>
               </div>
               <div>
-                <div>Corrections</div>
+                <div className="font-[700] text-[2rem] leading-[2.724rem]">Corrections</div>
                 {sections.map((section, index) =>
                   this.renderSection(index, section.question, section.answer)
                 )}
