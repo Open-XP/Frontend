@@ -124,10 +124,10 @@ export default function (state = initialState, action) {
         ...state,
         userScores: {
           ...state.userScores,
-          [action.payload.test_instance_id]: {
-            ...state.userScores[action.payload.test_instance_id],
-            results: action.payload,
-          },
+          totalQuestions: action.payload.total_questions,
+          score: action.payload.score,
+          correctQuestions: action.payload.correct_questions,
+          incorrectQuestions: action.payload.incorrect_questions,
         },
         loading: false,
       };
