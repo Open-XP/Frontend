@@ -145,13 +145,13 @@ class Evaluation extends Component {
     const { testInstances } = this.props;
     if (testInstances && testInstances.id && shouldComplete) {
       this.props.completeTest(testInstances.id);
-      this.props.navigate("dashboard/summary");
+      this.props.navigate("/dashboard/summary");
     }
   };
 
   handleTimesUp = () => {
     this.props.completeTest(this.props.testInstances.id);
-    this.props.navigate("dashboard/summary");
+    this.props.navigate("/dashboard/summary");
   };
 
   renderQuestion = () => {
@@ -210,7 +210,7 @@ class Evaluation extends Component {
     const seconds = remainingTime % 60;
 
     return (
-      <div className=" flex flex-col w-screen h-screen -m-[9.9rem]">
+      <div className=" flex flex-col w-screen h-screen">
         <div className="flex w-screen justify-center shadow-xl">
           <div className="flex flex-row w-[80%] h-[6.375rem] justify-between items-center">
             <div className="flex gap-4 items-center">
