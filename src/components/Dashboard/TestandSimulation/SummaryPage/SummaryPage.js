@@ -40,6 +40,10 @@ class SummaryPage extends Component {
     });
   };
 
+  handleReturnHome = () => {
+    this.props.navigate("/dashboard");
+  };
+
   renderSection = (index, question, answer) => {
     const { visibility } = this.state;
     return (
@@ -102,6 +106,12 @@ class SummaryPage extends Component {
           <div className="font-[500] text-[1.5rem] w-[23.625rem] text-center lead-[2.043rem]">
             Average, Try again to understand concepts
           </div>
+          <button
+            onClick={this.handleReturnHome}
+            className="flex items-center justify-center font-[700] text-[1.5rem] bg-skyblue-secondary border-none w-[13.75rem] h-[4.25rem] rounded-[0.438rem] text-center"
+          >
+            Return Home
+          </button>
         </div>
         <div className="flex w-full h-full justify-end">
           <div className="w-[65%] h-screen">

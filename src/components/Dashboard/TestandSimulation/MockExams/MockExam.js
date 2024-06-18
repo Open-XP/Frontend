@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import ExamSetter from "./ExamSetter";
+import NecoLogo from "../../../../icons/neco_logo.png";
+import WaecLogo from "../../../../icons/waec_logo.png";
+import JambLogo from "../../../../icons/jamb_logo.png";
 
 export default class MockExam extends Component {
   constructor(props) {
@@ -29,11 +32,7 @@ export default class MockExam extends Component {
         >
           <div className="flex flex-col w-full gap-3 h-[20rem] justify-center items-center">
             <div>
-              <img
-                src={require("../../../../icons/waec-logo.png")}
-                className="w-52 h-52"
-                alt="WAEC Logo"
-              />
+              <img src={WaecLogo} className="w-52 h-52" alt="WAEC Logo" />
             </div>
             <div className="font-bold text-2xl text-purple-primary w-[15rem] text-center">
               West African Exam Council
@@ -47,11 +46,7 @@ export default class MockExam extends Component {
         >
           <div className="flex flex-col w-full gap-3 h-[20rem] justify-center items-center">
             <div>
-              <img
-                src={require("../../../../icons/jamb_logo.png")}
-                className="w-52 h-52"
-                alt="JAMB Logo"
-              />
+              <img src={JambLogo} className="w-52 h-52" alt="JAMB Logo" />
             </div>
             <div className="font-bold text-2xl text-purple-primary w-[15rem] text-center">
               Joint Admissions & Matriculation Board
@@ -65,11 +60,7 @@ export default class MockExam extends Component {
         >
           <div className="flex flex-col w-full gap-3 h-[20rem] justify-center items-center">
             <div>
-              <img
-                src={require("../../../../icons/neco_logo.png")}
-                className="w-57 h-52"
-                alt="NECO Logo"
-              />
+              <img src={NecoLogo} className="w-57 h-52" alt="NECO Logo" />
             </div>
             <div className="font-bold text-2xl text-purple-primary w-[16rem] text-center">
               The National Examinations Council
@@ -81,8 +72,13 @@ export default class MockExam extends Component {
           style={{ border: "solid #2D9CDB" }}
           onClick={this.showExamSetter}
         >
-          <div className="w-full h-[20rem]">
-            <div>General Certificate of Education</div>
+          <div className="flex flex-col w-full gap-3 h-[20rem] justify-center items-center">
+            <div>
+              <img src={NecoLogo} className="w-57 h-52" alt="NECO Logo" />
+            </div>
+            <div className="font-bold text-2xl text-purple-primary w-[16rem] text-center">
+              National Common Entrance Examination
+            </div>
           </div>
         </button>
       </div>
