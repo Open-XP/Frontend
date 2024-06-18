@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactComponent as WaecLogo } from "../../../svgs/waec-small.svg";
 import { ReactComponent as JambLogo } from "../../../svgs/jamb-small.svg";
-import NecoLogo from "../../../icons/neco-small.png";
+import { ReactComponent as NecoLogo } from "../../../svgs/neco-small.svg";
 
 /**
  * Renders the second section of the landing page.
@@ -90,13 +90,13 @@ const SecondSection = () => {
               </div>
             </div>
             <div className="flex h-[8.438rem] w-full 2xl:w-[38.813rem] items-center justify-center gap-[0.938rem] shadow-custom">
-              <img src={NecoLogo} className="w-[3.938rem] h-[3.938rem]" />
+              <NecoLogo className="w-[3.938rem] h-[3.938rem]" />
               <div className="font-[500] text-[1.25rem] leading-[1.703rem] font-sans">
                 NECO Examination Question and Materials
               </div>
             </div>
             <div className="flex h-[8.438rem] w-full 2xl:w-[38.813rem] items-center justify-center gap-[0.938rem] shadow-custom">
-              <img src={NecoLogo} className="w-[3.938rem] h-[3.938rem]" />
+              <NecoLogo className="w-[3.938rem] h-[3.938rem]" />
               <div className="font-[500] text-[1.25rem] leading-[1.703rem] font-sans">
                 NCEE Examination Question and Materials
               </div>

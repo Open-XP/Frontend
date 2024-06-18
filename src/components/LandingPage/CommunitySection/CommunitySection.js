@@ -1,5 +1,5 @@
 import React from "react";
-import Students from "../../../icons/study-group-african-people.png";
+import { ReactComponent as Students } from "../../../svgs/study-group-african-people.svg";
 import { ArrowLongRightIcon } from "@heroicons/react/24/solid";
 
 /**
@@ -63,7 +63,7 @@ const CommunitySection = () => {
           </div>
         </div>
         <div className="flex w-1/2 h-[33.25rem] justify-center">
-          <img src={Students} className="w-[37.875rem] h-[33.25rem]" />
+          <Students className="w-[37.875rem] h-[33.25rem]" />
         </div>
       </div>
     </div>

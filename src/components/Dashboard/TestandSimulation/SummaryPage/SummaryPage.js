@@ -22,7 +22,7 @@ class SummaryPage extends Component {
   componentDidMount() {
     const { fetchUserScore, testInstances, userScores } = this.props;
     if (this.props.testInstances) {
-      fetchUserScore(testInstances.id);
+      fetchUserScore(testInstances.id && userScores);
       this.setState({ loading: false });
     }
   }
@@ -59,6 +59,7 @@ class SummaryPage extends Component {
     }
     const { userScores } = this.props;
 
+    // Prepare sections from incorrect questions
     const sections =
       userScores.incorrect_questions?.map((item, index) => {
         const correctOptionKey = `option_${item.answer}`;
@@ -69,7 +70,7 @@ class SummaryPage extends Component {
       }) || [];
 
     return (
-      <div className="flex w-screen h-screen ">
+      <div className="flex w-screen h-screen">
         <div className="fixed flex flex-col w-[35%] bg-purple-primary h-full text-white justify-center items-center gap-5">
           <div className="flex flex-col w-[20.375rem] h-[26.563rem] items-center justify-between">
             <div className="font-[700] text-[2.5rem] leading-[8.171rem] font-sans">
@@ -78,7 +79,7 @@ class SummaryPage extends Component {
             <div className="flex w-[19.75rem] h-[19.75rem] rounded-[50%] justify-center items-center border-white border-[9px]">
               <div>
                 <div className="font-[700] text-[6rem] text-center leading-[8.171rem]">
-                  {userScores.correct_questions.length}
+                  {userScores.score}
                 </div>
                 <div className="font-[600] text-[2.5rem] leading-[3.404rem]">
                   OF {userScores.total_questions}
@@ -126,7 +127,7 @@ class SummaryPage extends Component {
                 </div>
               </div>
               <div>
-                <div className="font-[700] text-[2rem] leading-[2.724rem]">Corrections</div>
+                <div>Corrections</div>
                 {sections.map((section, index) =>
                   this.renderSection(index, section.question, section.answer)
                 )}
