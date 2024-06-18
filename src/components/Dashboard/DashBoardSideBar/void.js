@@ -2,8 +2,8 @@ import React from "react";
 
 export function Void() {
   return (
-    <div className="w-[32rem] shrink-0 max-w-[30rem] max-h-[full]">
-      <div className="w-full h-full"></div>
+    <div className="shrink-0 w-[32rem] h-full bg-red-500">
+      <div className="w-full h-full flex items-center justify-center text-white"></div>
     </div>
   );
 }
