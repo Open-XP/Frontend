@@ -142,7 +142,7 @@ export class LogInPage extends Component {
                       Remember me
                     </div>
                     <Link
-                      to="/reset-password"
+                      to="/password-reset"
                       className="font-[500] text-[1.25rem] leading-[1.703rem] pr-[1rem] text-skyblue-secondary"
                     >
                       Forgot Password?

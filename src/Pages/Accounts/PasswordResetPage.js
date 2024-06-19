@@ -76,7 +76,7 @@ export class PasswordResetPage extends Component {
                     Reset Password
                   </button>
                 </div>
-                <div className="font-[400] text-[1.25rem]">
+                <div className="font-[400] text-[1.25rem] relative top-[20rem]">
                   By Continuing, You agree to Openxp{" "}
                   <span className="font-[400] text-[1.25rem] text-skyblue-secondary">
                     Terms
