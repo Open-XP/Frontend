@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import { withRouterHooks } from "../../withRouters/withRoutersHook";
 import PropTypes from "prop-types";
 import { resetpassword } from "../../Actions/Auth";
-import HideIcon from "../../icons/hide.png";
-import ViewIcon from "../../icons/view.png";
 
 export class PasswordResetPage extends Component {
   state = {
