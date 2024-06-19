@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./AxiosConfig";
 import { returnErrors } from "./Messages";
 import {
   USER_LOADED,
@@ -131,7 +131,6 @@ export const tokenConfig = (getState) => {
   return config;
 };
 
-// RESET PASSWORD
 export const resetpassword = (email) => (dispatch) => {
   // Headers
   const config = {
@@ -144,7 +143,7 @@ export const resetpassword = (email) => (dispatch) => {
   const body = JSON.stringify({ email });
 
   axios
-    .post(`${baseurl}/auth/user/reset-password/`, body, config)
+    .post(`${baseurl}/api/auth/user/reset-password/`, body, config)
     .then((res) => {
       dispatch({
         type: PASSWORD_RESET_SUCCESS,

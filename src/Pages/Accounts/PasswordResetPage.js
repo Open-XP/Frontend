@@ -32,10 +32,7 @@ export class PasswordResetPage extends Component {
   };
 
   render() {
-    if (this.props.isAuthenticated) {
-      this.props.navigate("/dashboard");
-    }
-    const { email, password, showPassword } = this.state;
+    const { email } = this.state;
     return (
       <div className="flex w-full h-screen justify-center items-center">
         <div className="flex flex-col w-[90rem] h-[70.063rem] justify-center items-center gap-[4rem]">
