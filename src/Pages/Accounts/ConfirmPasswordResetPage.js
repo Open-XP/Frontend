@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withRouterHooks } from "../../withRouters/withRoutersHook";
@@ -7,26 +7,32 @@ import { registers } from "../../Actions/Auth";
 import HideIcon from "../../icons/hide.png";
 import ViewIcon from "../../icons/view.png";
 
-export class ConfirmPasswordResetPage extends Component {
+class ConfirmPasswordResetPage extends Component {
   state = {
     password: "",
     confirm_password: "",
+    showPassword: false,
   };
 
   static propTypes = {
     registers: PropTypes.func.isRequired,
     createMessage: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
+    confirmPassword: PropTypes.func.isRequired,
   };
+
+  componentDidMount() {
+    console.log("Props: ", this.props);
+  }
 
   onSubmit = (e) => {
     e.preventDefault();
     const { password, confirm_password } = this.state;
-    const { navigate } = this.props;
+    const { navigate, location } = this.props;
 
-    const pathParts = this.props.location.pathname.split("/");
-    const uidb64 = pathParts[pathParts.length - 3];
-    const token = pathParts[pathParts.length - 2];
+    const pathParts = location.pathname.split("/");
+    const uidb64 = pathParts[pathParts.length - 2];
+    const token = pathParts[pathParts.length - 1];
 
     this.props.confirmPassword(uidb64, token, password, confirm_password);
   };
@@ -50,7 +56,7 @@ export class ConfirmPasswordResetPage extends Component {
         <div className="flex flex-col w-[90rem] h-screen items-center gap-[4rem] justify-center">
           <div className="flex flex-col w-[31.5rem] h-[6.313rem] items-center gap-[0.8rem]">
             <div className="font-[700] text-[2.5rem] font-sans leading-[3.404rem]">
-              Sign Up
+              Reset Password
             </div>
             <div className="font-[500] text-[1.5rem] leading-[2.043rem]">
               have an account?{" "}
@@ -109,16 +115,16 @@ export class ConfirmPasswordResetPage extends Component {
                     value={confirm_password}
                     onChange={this.onChange}
                     autoComplete="off"
-                    placeholder="Password"
+                    placeholder="Confirm Password"
                     className="w-full h-[3.125rem] border-none bg-[#E9F0FA] rounded-[0.625rem] pl-[1.25rem] text-[1.5rem] font-[600] font-sans flex items-center"
                   />
                 </div>
                 <div className="flex flex-col gap-[1.625rem]">
                   <button
-                    onSubmit={this.onSubmit}
+                    type="submit"
                     className="w-[9.438rem] h-[3.438rem] font-sans font-[700] text-[1.438rem] leading-[2.043rem] bg-[#D9D9D952] bg-opacity-32 rounded-xl"
                   >
-                    Sign Up
+                    Reset Password
                   </button>
                 </div>
                 <div className="font-[400] text-[1.25rem]">
